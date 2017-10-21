@@ -30,6 +30,7 @@ configure_file(images/bedroom.png bedroom.png COPYONLY)
 configure_file(images/arcade.png arcade.png COPYONLY)
 configure_file(images/studio.png studio.png COPYONLY)
 configure_file(music/track1.ogg track1.ogg COPYONLY)
+configure_file(music/track2.ogg track2.ogg COPYONLY)
 
 add_executable(SFML ${SOURCE_FILES})
 

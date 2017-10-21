@@ -38,7 +38,7 @@ int main() {
     BRO::Room currentRoom = studioRoom;
     BRO::Player currentPlayer = player;
 
-    BRO::Music track1("track1.ogg");
+    BRO::Music track1("track2.ogg");
     track1.audio.setVolume(40);
 
     BRO::Pathfinder pathfinder;

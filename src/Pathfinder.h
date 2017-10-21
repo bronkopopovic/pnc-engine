@@ -47,16 +47,11 @@ namespace BRO{
     //-----------------
     class Pathfinder {
     public:
-        bool CCW(const std::vector<sf::Vector2f>& points);
-
-        // vector of (2) lines. line is a vector of (2) vector2fs (the points of the line).
-        // i.e. { { line1.x, line.y }, { line2.x, line2.y } }
-        bool doLinesIntersect(const std::vector<std::vector<sf::Vector2f>>& lines);
+        int orientation(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
+        bool doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f p2, sf::Vector2f q2);
 
         int lineIntersects;
         std::vector<sf::Vector2f> polyEdge;
-        std::vector<sf::Vector2f> playerCursorLine;
-        std::vector<std::vector<sf::Vector2f>> lines;
         bool validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window);
     };
 }
