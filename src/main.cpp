@@ -73,8 +73,9 @@ int main() {
 
         if(clickedInWindow){
             cout << "click" << endl;
-            pathfinder.validPolygon(navMesh, player, cursor);
-            currentPlayer.setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
+            if (pathfinder.validPolygon(navMesh, player, cursor, game.window)){
+                currentPlayer.setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
+            }
         }
 
         currentRoom.scrollHorizontal(currentPlayer.sprite.getPosition().x, game.resMultiplier);

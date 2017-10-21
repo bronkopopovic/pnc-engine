@@ -53,13 +53,11 @@ namespace BRO{
         // i.e. { { line1.x, line.y }, { line2.x, line2.y } }
         bool doLinesIntersect(const std::vector<std::vector<sf::Vector2f>>& lines);
 
-        bool isPointInsidePolygon(const sf::Vector2f& point, const std::vector<sf::Vector2f>& polygonVertices);
-
-        bool isPointInsidePolygon(const sf::Vector2f& point, const std::vector<sf::Vector2f>& polygonVertices, const sf::FloatRect& boundingBox);
-
-        sf::FloatRect boundingBox(const std::vector<sf::Vector2f>& vertices);
-
-        void validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor);
+        int lineIntersects;
+        std::vector<sf::Vector2f> polyEdge;
+        std::vector<sf::Vector2f> playerCursorLine;
+        std::vector<std::vector<sf::Vector2f>> lines;
+        bool validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window);
     };
 }
 

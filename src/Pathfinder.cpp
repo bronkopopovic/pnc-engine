@@ -35,33 +35,34 @@ bool BRO::Pathfinder::doLinesIntersect(const std::vector<std::vector<sf::Vector2
               (CCW({ lines[0][0], lines[0][1], lines[1][0] }) != CCW({ lines[0][0], lines[0][1], lines[1][1] }));
 }
 
-void BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor) {
 
+bool BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window) {
+
+    lineIntersects = 0;
     for (int i = 0; i < navMesh.shapeList.size(); i++){
-        int lineCrosses = 0;
-        std::vector<sf::Vector2f> line;
-        std::vector<sf::Vector2f> playerCursorLine;
-        std::vector<std::vector<sf::Vector2f>> lines;
         if (navMesh.shapeList[i].getGlobalBounds().contains(cursor.sprite.getPosition())){
-            //bool validPoly = false;
-            for (int n = 1; n < navMesh.shapeList[i].getPointCount(); n++){
-                line.push_back(navMesh.shapeList[i].getPoint(n));
-                line.push_back(navMesh.shapeList[i].getPoint(n+1));
+            for (int n = 0; n < navMesh.shapeList[i].getPointCount(); n++){
+                polyEdge.push_back(navMesh.shapeList[i].getPoint(n));
+                polyEdge.push_back(navMesh.shapeList[i].getPoint(n+1));
                 playerCursorLine.push_back(sf::Vector2f(0,0));
                 playerCursorLine.push_back(cursor.sprite.getPosition());
-                lines.push_back(line);
+                lines.push_back(polyEdge);
                 lines.push_back(playerCursorLine);
                 if (BRO::Pathfinder::doLinesIntersect(lines)){
-                    lineCrosses += 1;
+                    lineIntersects += 1;
                 }
-                line.clear();
+                polyEdge.clear();
                 playerCursorLine.clear();
                 lines.clear();
             }
-            if (lineCrosses == 1){
+            if (lineIntersects == 1){
                 std::cout << "You clicked a valid Polygon" << std::endl;
+                return true;
             }
         }
+    }
+    if (lineIntersects != 1){
+        return false;
     }
 
 }
