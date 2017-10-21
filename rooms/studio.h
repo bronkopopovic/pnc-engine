@@ -234,6 +234,7 @@ poly15.setPoint(2, point79);
 poly15.setPoint(3, point80);
 poly15.setFillColor(sf::Color(255, 0, 0, 80));
 
+// nav mesh
 BRO::NavMesh navMesh;
 navMesh.addShape(poly1);
 navMesh.addShape(poly2);

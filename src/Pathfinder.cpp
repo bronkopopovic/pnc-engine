@@ -45,7 +45,6 @@ bool BRO::Pathfinder::doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f
 }
 
 bool BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window) {
-
     lineIntersects = 0;
     for (int i = 0; i < navMesh.shapeList.size(); i++){
         if (navMesh.shapeList[i].getGlobalBounds().contains(cursor.sprite.getPosition())){
@@ -66,5 +65,4 @@ bool BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, B
     if (lineIntersects != 1){
         return false;
     }
-
 }

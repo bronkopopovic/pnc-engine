@@ -85,7 +85,7 @@ int main() {
 
         currentRoom.drawRoom(game.window);
 
-        game.window.draw(poly1);
+        /*game.window.draw(poly1);
         game.window.draw(poly2);
         game.window.draw(poly3);
         game.window.draw(poly4);
@@ -99,10 +99,10 @@ int main() {
         game.window.draw(poly12);
         game.window.draw(poly13);
         game.window.draw(poly14);
-        game.window.draw(poly15);
+        game.window.draw(poly15);*/
 
         game.window.draw(currentPlayer.sprite);
-        game.window.draw(cursorLine, 2, sf::Lines);
+        //game.window.draw(cursorLine, 2, sf::Lines);
         game.window.draw(cursor.sprite);
 
 
