@@ -56,7 +56,7 @@ bool BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, B
                 } else {
                     polyEdge.push_back(navMesh.shapeList[i].getPoint(n+1));
                 }
-                if (BRO::Pathfinder::doIntersect(polyEdge[0], polyEdge[1], sf::Vector2f(0,0), cursor.sprite.getPosition())){
+                if (BRO::Pathfinder::doIntersect(polyEdge[0], polyEdge[1], sf::Vector2f(player.sprite.getPosition().x,0), cursor.sprite.getPosition())){
                     lineIntersects += 1;
                 }
                 polyEdge.clear();

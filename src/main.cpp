@@ -43,10 +43,9 @@ int main() {
 
     BRO::Pathfinder pathfinder;
 
-    #include "../rooms/studio.h"
+    #include "../rooms/studio.conf"
 
     sf::Vertex cursorLine[2];
-    cursorLine[0].position = sf::Vector2f(0,0);
     cursorLine[0].color = sf::Color(255,255,255);
     cursorLine[1].color = sf::Color(255,255,255);
 
@@ -58,11 +57,13 @@ int main() {
             }
         }
 
+        cursorLine[0].position = sf::Vector2f(currentPlayer.sprite.getPosition().x, 0);
         cursorLine[1].position = cursor.sprite.getPosition();
 
         track1.loop();
 
         currentPlayer.animate(game.resMultiplier, game.resMultiplierF);
+
         cursor.update(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
 
         bool clickedInWindow (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
@@ -73,7 +74,7 @@ int main() {
 
         if(clickedInWindow){
             cout << "click" << endl;
-            if (pathfinder.validPolygon(navMesh, player, cursor, game.window)){
+            if (pathfinder.validPolygon(navMesh, currentPlayer, cursor, game.window)){
                 currentPlayer.setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
             }
         }
