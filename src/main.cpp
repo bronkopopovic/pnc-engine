@@ -45,12 +45,20 @@ int main() {
 
     #include "../rooms/studio.h"
 
+    sf::Vertex cursorLine[2];
+    cursorLine[0].position = sf::Vector2f(0,0);
+    cursorLine[0].color = sf::Color(255,255,255);
+    cursorLine[1].color = sf::Color(255,255,255);
+
+
     while(game.window.isOpen()){
         while(game.window.pollEvent(event)) {
             if(event.type == sf::Event::Closed){
                 game.window.close();
             }
         }
+
+        cursorLine[1].position = cursor.sprite.getPosition();
 
         track1.loop();
 
@@ -64,6 +72,7 @@ int main() {
             sf::Mouse::getPosition(game.window).y >= 0);
 
         if(clickedInWindow){
+            cout << "click" << endl;
             pathfinder.validPolygon(navMesh, player, cursor);
             currentPlayer.setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
         }
@@ -92,7 +101,9 @@ int main() {
         game.window.draw(poly15);
 
         game.window.draw(currentPlayer.sprite);
+        game.window.draw(cursorLine, 2, sf::Lines);
         game.window.draw(cursor.sprite);
+
 
         game.window.display();
     }
