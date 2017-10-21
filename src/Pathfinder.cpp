@@ -46,11 +46,16 @@ bool BRO::Pathfinder::doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f
 
 bool BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window) {
     lineIntersects = 0;
-    for (int i = 0; i < navMesh.shapeList.size(); i++){
+    for (int i = 0; i <= navMesh.shapeList.size(); i++){
         if (navMesh.shapeList[i].getGlobalBounds().contains(cursor.sprite.getPosition())){
+            std::cout << "bounding" << std::endl;
             for (int n = 0; n < navMesh.shapeList[i].getPointCount(); n++){
                 polyEdge.push_back(navMesh.shapeList[i].getPoint(n));
-                polyEdge.push_back(navMesh.shapeList[i].getPoint(n+1));
+                if (n+2 > navMesh.shapeList[i].getPointCount()){
+                    polyEdge.push_back(navMesh.shapeList[i].getPoint(0));
+                } else {
+                    polyEdge.push_back(navMesh.shapeList[i].getPoint(n+1));
+                }
                 if (BRO::Pathfinder::doIntersect(polyEdge[0], polyEdge[1], sf::Vector2f(0,0), cursor.sprite.getPosition())){
                     lineIntersects += 1;
                 }
