@@ -16,8 +16,6 @@ set(SOURCE_FILES
         src/Room.h
         src/Item.cpp
         src/Item.h
-        src/World.cpp
-        src/World.h
         src/Pathfinder.cpp
         src/Pathfinder.h
         src/Music.cpp

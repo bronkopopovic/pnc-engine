@@ -2,12 +2,11 @@
 
 void BRO::Node::addAdjacent(Node &node, Node &parent) {
 
-    std::vector nodeInfo;
-    nodeInfo[0][0] = node;
-    nodeInfo[0][1] = BRO::Pathfinder::pointToPointDistance(node, parent);
+    std::pair<BRO::Node, float> nodeInfo;
+    nodeInfo.first = node;
+    nodeInfo.second = BRO::Pathfinder::pointToPointDistance(node, parent);
 
     adjacencyList.push_back(nodeInfo);
-    std::cout <<  BRO::Pathfinder::pointToPointDistance(node, parent) << std::endl;
 }
 
 void BRO::Node::setCoords(float xCoord, float yCoord) {
@@ -55,7 +54,7 @@ bool BRO::Pathfinder::doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f
     return false;
 }
 
-int BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window) {
+int BRO::Pathfinder::isValidPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window) {
     lineIntersects = 0;
     for (int i = 0; i <= navMesh.shapeList.size(); i++){
         if (navMesh.shapeList[i].getGlobalBounds().contains(cursor.sprite.getPosition())){
@@ -83,19 +82,19 @@ int BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BR
     }
 }
 
-static float BRO::Pathfinder::pointToPointDistance(BRO::Node &node1, BRO::Node &node2) {
+float BRO::Pathfinder::pointToPointDistance(BRO::Node &node1, BRO::Node &node2) {
     return std::sqrt(((node1.x - node2.x)*(node1.x - node2.x)) + ((node1.y - node2.y)*(node1.y - node2.y)));
 }
 
-void BRO::Pathfinder::getNodePath(BRO::Node &startNode, BRO::Node &endNode) {
+/*void BRO::Pathfinder::getNodePath(BRO::Node *startNode, BRO::Node &endNode) {
 
     openList.push_back(startNode);
     for (int i = 0; i < startNode.adjacencyList.size(); i++){
-        openList.push_back(startNode.adjacencyList[i][0]);
-        startNode.adjacencyList[i][0].parent = startNode;
+        openList.push_back(startNode.adjacencyList[i].first);
+        startNode.adjacencyList[i].first.parent = startNode;
     }
     openList.erase(openList.begin());
     closedList.push_back(startNode);
 
 
-}
+}*/
