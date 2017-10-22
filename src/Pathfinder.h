@@ -17,15 +17,15 @@ namespace BRO{
     public:
         std::vector<std::pair<BRO::Node, float>> adjacencyList;
 
-        //Node *parent;
+        // parent node represented as integer which will
+        // index the corresponding node in the navMesh
+        int parent;
+        int currentNode;
 
-        float x;
-        float y;
-
-
+        float x, y;
         float H;
 
-        void addAdjacent(Node &node, Node &parent);
+        void addAdjacency(Node &node, Node &parent);
 
         void setCoords(float xCoord, float yCoord);
     };
@@ -64,7 +64,7 @@ namespace BRO{
         // check, if user clicked inside a polygon
         int lineIntersects;
         std::vector<sf::Vector2f> polyEdge;
-        int isValidPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window);
+        int isInsidePolygon(BRO::NavMesh &navMesh, BRO::Player &player, sf::RenderWindow &window, sf::Vector2f checkedPoint);
 
         // A-star algorithm for polygon preselection
         static float pointToPointDistance(BRO::Node &node1, BRO::Node &node2);
@@ -72,10 +72,11 @@ namespace BRO{
         std::vector<BRO::Node> openList;
         std::vector<BRO::Node> closedList;
 
+        int startNodeI;
         BRO::Node startNode;
         BRO::Node endNode;
 
-        //void getNodePath(BRO::Node &startNode, BRO::Node &endNode);
+        void getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window);
     };
 }
 
