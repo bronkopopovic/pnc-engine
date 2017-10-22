@@ -1,12 +1,12 @@
 #include "Pathfinder.h"
 
-void BRO::Node::addAdjacency(Node &node, Node &parent) {
+void BRO::Node::addAdjacency(Node &node) {
 
-    std::pair<BRO::Node, float> nodeInfo;
-    nodeInfo.first = node;
-    nodeInfo.second = BRO::Pathfinder::pointToPointDistance(node, parent);
+    adjacencyList.push_back(node);
+}
 
-    adjacencyList.push_back(nodeInfo);
+float BRO::Node::calculateF(float H, float G){
+    return H + G;
 }
 
 void BRO::Node::setCoords(float xCoord, float yCoord) {
@@ -97,13 +97,16 @@ void BRO::Pathfinder::getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BR
 
     // Push adjacent Nodes of startNode to open List
     for (int i = 0; i < startNode.adjacencyList.size(); i++){
-        openList.push_back(startNode.adjacencyList[i].first);
-        startNode.adjacencyList[i].first.parent = startNodeI;
+        openList.push_back(startNode.adjacencyList[i]);
+        startNode.adjacencyList[i].parent = startNodeI;
     }
 
     // remove startNode from open List and push to closed List
     openList.erase(openList.begin());
     closedList.push_back(startNode);
 
+    /*for (int i = 0; i < openList.size(); i++){
+        openList[i].F = BRO::Node::calculateF(openList[i].);
+    }*/
 
 }

@@ -15,7 +15,7 @@ namespace BRO{
     //-----------------
     class Node {
     public:
-        std::vector<std::pair<BRO::Node, float>> adjacencyList;
+        std::vector<BRO::Node> adjacencyList;
 
         // parent node represented as integer which will
         // index the corresponding node in the navMesh
@@ -23,9 +23,11 @@ namespace BRO{
         int currentNode;
 
         float x, y;
-        float H;
+        float H, G, F;
 
-        void addAdjacency(Node &node, Node &parent);
+        void addAdjacency(Node &node);
+
+        static float calculateF(float H, float G);
 
         void setCoords(float xCoord, float yCoord);
     };
@@ -71,6 +73,7 @@ namespace BRO{
 
         std::vector<BRO::Node> openList;
         std::vector<BRO::Node> closedList;
+
 
         int startNodeI;
         BRO::Node startNode;
