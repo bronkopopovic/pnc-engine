@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <cmath>
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Cursor.h"
@@ -14,9 +15,19 @@ namespace BRO{
     //-----------------
     class Node {
     public:
-        std::vector<Node> adjacencyList;
+        std::vector<std::vector<BRO::Node, >> adjacencyList;
 
-        void addAdjacent(const Node &node);
+        Node *parent;
+
+        float x;
+        float y;
+
+
+        float H;
+
+        void addAdjacent(Node &node, Node &parent);
+
+        void setCoords(float xCoord, float yCoord);
     };
 
     //-------------------------
@@ -43,16 +54,28 @@ namespace BRO{
     };
 
     //-----------------
-    // LINES etc
+    // PATHFINDER
     //-----------------
     class Pathfinder {
     public:
         int orientation(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
         bool doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f p2, sf::Vector2f q2);
 
+        // check, if user clicked inside a polygon
         int lineIntersects;
         std::vector<sf::Vector2f> polyEdge;
-        bool validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window);
+        int validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window);
+
+        // A-star algorithm for polygon preselection
+        static float pointToPointDistance(BRO::Node &node1, BRO::Node &node2);
+
+        std::vector<BRO::Node> openList;
+        std::vector<BRO::Node> closedList;
+
+        BRO::Node startNode;
+        BRO::Node endNode;
+
+        void getNodePath(BRO::Node &startNode, BRO::Node &endNode);
     };
 }
 

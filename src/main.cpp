@@ -74,7 +74,7 @@ int main() {
 
         if(clickedInWindow){
             cout << "click" << endl;
-            if (pathfinder.validPolygon(navMesh, currentPlayer, cursor, game.window)){
+            if (pathfinder.validPolygon(navMesh, currentPlayer, cursor, game.window) != -1){
                 currentPlayer.setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
             }
         }

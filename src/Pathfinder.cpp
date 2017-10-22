@@ -1,7 +1,18 @@
 #include "Pathfinder.h"
 
-void BRO::Node::addAdjacent(const Node &node) {
-    adjacencyList.push_back(node);
+void BRO::Node::addAdjacent(Node &node, Node &parent) {
+
+    std::vector nodeInfo;
+    nodeInfo[0][0] = node;
+    nodeInfo[0][1] = BRO::Pathfinder::pointToPointDistance(node, parent);
+
+    adjacencyList.push_back(nodeInfo);
+    std::cout <<  BRO::Pathfinder::pointToPointDistance(node, parent) << std::endl;
+}
+
+void BRO::Node::setCoords(float xCoord, float yCoord) {
+    x = xCoord;
+    y = yCoord;
 }
 
 void BRO::Polygon::assign(sf::ConvexShape &_shape, BRO::Node &_node) {
@@ -44,7 +55,7 @@ bool BRO::Pathfinder::doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f
     return false;
 }
 
-bool BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window) {
+int BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window) {
     lineIntersects = 0;
     for (int i = 0; i <= navMesh.shapeList.size(); i++){
         if (navMesh.shapeList[i].getGlobalBounds().contains(cursor.sprite.getPosition())){
@@ -63,11 +74,28 @@ bool BRO::Pathfinder::validPolygon(BRO::NavMesh &navMesh, BRO::Player &player, B
             }
             if (lineIntersects == 1){
                 std::cout << "You clicked a valid Polygon" << std::endl;
-                return true;
+                return i;
             }
         }
     }
     if (lineIntersects != 1){
-        return false;
+        return -1;
     }
+}
+
+static float BRO::Pathfinder::pointToPointDistance(BRO::Node &node1, BRO::Node &node2) {
+    return std::sqrt(((node1.x - node2.x)*(node1.x - node2.x)) + ((node1.y - node2.y)*(node1.y - node2.y)));
+}
+
+void BRO::Pathfinder::getNodePath(BRO::Node &startNode, BRO::Node &endNode) {
+
+    openList.push_back(startNode);
+    for (int i = 0; i < startNode.adjacencyList.size(); i++){
+        openList.push_back(startNode.adjacencyList[i][0]);
+        startNode.adjacencyList[i][0].parent = startNode;
+    }
+    openList.erase(openList.begin());
+    closedList.push_back(startNode);
+
+
 }
