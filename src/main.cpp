@@ -30,10 +30,11 @@ int main() {
     BRO::Cursor cursor;
     cursor.setScale(game.resMultiplier);
 
-    BRO::Player player("sprite_full.png", game.resMultiplier);
+    #include "../characters/ch2.conf"
+
     player.sprite.setPosition(100 * game.resMultiplier, 100 * game.resMultiplier);
     player.sprite.setScale(game.resMultiplier, game.resMultiplier);
-    player.setTarget(sf::Vector2f(80 * game.resMultiplier, 140 * game.resMultiplier));
+    player.setTarget(sf::Vector2f(100 * game.resMultiplier, 100 * game.resMultiplier));
 
     BRO::Room currentRoom = studioRoom;
     BRO::Player currentPlayer = player;
@@ -57,12 +58,12 @@ int main() {
             }
         }
 
-        cursorLine[0].position = sf::Vector2f(currentPlayer.sprite.getPosition().x, 0);
+        cursorLine[0].position = sf::Vector2f(player.sprite.getPosition().x, 0);
         cursorLine[1].position = cursor.sprite.getPosition();
 
         track1.loop();
 
-        currentPlayer.animate(game.resMultiplier, game.resMultiplierF);
+        player.animate(game.resMultiplier, game.resMultiplierF);
 
         cursor.update(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
 
@@ -74,19 +75,19 @@ int main() {
 
         if(clickedInWindow){
             cout << "click" << endl;
-            if (pathfinder.isInsidePolygon(navMesh, currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
-                currentPlayer.setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
+            if (pathfinder.isInsidePolygon(navMesh, player, game.window, cursor.sprite.getPosition()) != -1){
+                player.setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
             }
         }
 
-        currentRoom.scrollHorizontal(currentPlayer.sprite.getPosition().x, game.resMultiplier);
+        currentRoom.scrollHorizontal(player.sprite.getPosition().x, game.resMultiplier);
         currentRoom.view.reset(currentRoom.mask);
 
         game.window.clear(sf::Color::Black);
 
         currentRoom.drawRoom(game.window);
 
-        game.window.draw(poly1);
+        /*game.window.draw(poly1);
         game.window.draw(poly2);
         game.window.draw(poly3);
         game.window.draw(poly4);
@@ -100,10 +101,10 @@ int main() {
         game.window.draw(poly12);
         game.window.draw(poly13);
         game.window.draw(poly14);
-        game.window.draw(poly15);
+        game.window.draw(poly15);*/
 
-        game.window.draw(currentPlayer.sprite);
-        game.window.draw(cursorLine, 2, sf::Lines);
+        game.window.draw(player.sprite);
+        //game.window.draw(cursorLine, 2, sf::Lines);
         game.window.draw(cursor.sprite);
 
 

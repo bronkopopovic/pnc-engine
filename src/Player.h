@@ -5,11 +5,23 @@
 #include <cmath>
 
 namespace BRO{
+    class PlayerAnimation {
+    public:
+        int animationID;
+        int top;
+        int startLeft;
+        int maxLeft;
+        int incrementLeft;
+        float speed;
+    };
+
     class Player {
     private:
         sf::Texture texture;
-
     public:
+
+        std::vector<BRO::PlayerAnimation> spriteSheet;
+
         // init Objects
         sf::IntRect mask;
         sf::Sprite sprite;
@@ -23,12 +35,15 @@ namespace BRO{
         // Constructor
         Player(const std::string &filePath, unsigned int &resMultiplier);
 
+        void addAnimationToSheet(BRO::PlayerAnimation &spriteAnimation);
+        BRO::PlayerAnimation getAnimationFromSheet(std::vector<BRO::PlayerAnimation> &spriteSheet, int animationID);
+
         // Cycle through animation frames
-        void iterateSprite(int top, int startLeft, int maxLeft, int incrementLeft, float speed);
+        void iterateSprite(BRO::PlayerAnimation &spriteAnimation);
 
         void setTarget(sf::Vector2f coordinates);
 
-        void walk(unsigned int &resMultiplier, float &resMultiplierF);
+        void walk(unsigned int &resMultiplier, float &resMultiplierF, std::vector<BRO::PlayerAnimation> &spriteSheet);
 
         void idle();
 

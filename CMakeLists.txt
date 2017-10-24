@@ -4,6 +4,7 @@ project(PNC_Engine)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
+        characters/ch2.conf
         rooms/studio.conf
         src/main.cpp
         src/Game.cpp

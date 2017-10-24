@@ -22,14 +22,26 @@ BRO::Player::Player(const std::string &filePath, unsigned int &resMultiplier){
 //------------------------------------
 // Sprite Animation System
 //------------------------------------
-void BRO::Player:: iterateSprite(int top, int startLeft, int maxLeft, int incrementLeft, float speed){
-    mask.top = top;
-    if (clock.getElapsedTime().asSeconds() > speed){
-        if (mask.left >= maxLeft) {
-            mask.left = startLeft;
+void BRO::Player::addAnimationToSheet(BRO::PlayerAnimation &spriteAnimation) {
+    spriteSheet.push_back(spriteAnimation);
+}
+
+BRO::PlayerAnimation BRO::Player::getAnimationFromSheet(std::vector<BRO::PlayerAnimation> &spriteSheet, int animationID) {
+    for (int i = 0; i < spriteSheet.size(); i++){
+        if (spriteSheet[i].animationID == animationID){
+            return spriteSheet[i];
+        }
+    }
+}
+
+void BRO::Player:: iterateSprite(BRO::PlayerAnimation &playerAnimation){
+    mask.top = playerAnimation.top;
+    if (clock.getElapsedTime().asSeconds() > playerAnimation.speed){
+        if (mask.left >= playerAnimation.maxLeft) {
+            mask.left = playerAnimation.startLeft;
         }
         else {
-            mask.left += incrementLeft;
+            mask.left += playerAnimation.incrementLeft;
         }
         sprite.setTextureRect(mask);
         clock.restart();
@@ -46,7 +58,7 @@ void BRO::Player:: setTarget(sf::Vector2f coordinates){
 //----------------------------------------------
 // walk-animations + sprite movement
 //----------------------------------------------
-void BRO::Player:: walk(unsigned int &resMultiplier, float &resMultiplierF){
+void BRO::Player:: walk(unsigned int &resMultiplier, float &resMultiplierF, std::vector<BRO::PlayerAnimation> &spriteSheet){
     if (moveClock.getElapsedTime().asMilliseconds() > 10){
         sf::Vector2f direction = sf::Vector2f(moveTarget.x, moveTarget.y) - sprite.getPosition();
         float magnitude = sqrt((direction.x * direction.x) + (direction.y * direction.y));
@@ -73,19 +85,19 @@ void BRO::Player:: walk(unsigned int &resMultiplier, float &resMultiplierF){
 
         // walk left
         if (direction.x < 0 && positiveDirectionX > positiveDirectionY){
-            iterateSprite(80, 0, 192, 64, .08f);
+            iterateSprite(spriteSheet[1]);
         }
             // walk right
         else if (direction.x > 0 && positiveDirectionX > positiveDirectionY){
-            iterateSprite(160, 0, 192, 64, .08f);
+            iterateSprite(spriteSheet[2]);
         }
             // walk front
         else if (positiveDirectionX < positiveDirectionY && direction.y > 0){
-            iterateSprite(240, 0, 320, 64, .08f);
+            iterateSprite(spriteSheet[3]);
         }
             // walk back
         else if (positiveDirectionX < positiveDirectionY && direction.y < 0){
-            iterateSprite(320, 0, 320, 64, .08f);
+            iterateSprite(spriteSheet[4]);
         }
         moveClock.restart();
     }
@@ -95,7 +107,7 @@ void BRO::Player:: walk(unsigned int &resMultiplier, float &resMultiplierF){
 // idle animation
 //---------------------------
 void BRO::Player::idle(){
-    iterateSprite(0, 0, 448, 64, .2f);
+    iterateSprite(spriteSheet[0]);
 }
 
 //------------------------------------
@@ -103,7 +115,7 @@ void BRO::Player::idle(){
 //------------------------------------
 void BRO::Player:: animate(unsigned int &resMultiplier, float &resMultiplierF){
     if (round(moveTarget.x) != round(sprite.getPosition().x) && round(moveTarget.y) != round(sprite.getPosition().y)){
-        walk(resMultiplier, resMultiplierF);
+        walk(resMultiplier, resMultiplierF, spriteSheet);
     } else {
         idle();
     }
