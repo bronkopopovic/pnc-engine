@@ -33,9 +33,9 @@ int main() {
     //#include "../characters/ch2.conf"
     #include "../characters/ch4.conf"
 
-    player.sprite.setPosition(100 * game.resMultiplier, 100 * game.resMultiplier);
+    player.sprite.setPosition(120 * game.resMultiplier, 120 * game.resMultiplier);
     player.sprite.setScale(game.resMultiplier, game.resMultiplier);
-    player.setTarget(sf::Vector2f(100 * game.resMultiplier, 100 * game.resMultiplier));
+    player.setTarget(sf::Vector2f(120 * game.resMultiplier, 100 * game.resMultiplier));
 
     BRO::Room currentRoom = studioRoom;
     BRO::Player currentPlayer = player;
@@ -50,7 +50,6 @@ int main() {
     sf::Vertex cursorLine[2];
     cursorLine[0].color = sf::Color(255,255,255);
     cursorLine[1].color = sf::Color(255,255,255);
-
 
     while(game.window.isOpen()){
         while(game.window.pollEvent(event)) {
@@ -88,26 +87,13 @@ int main() {
 
         currentRoom.drawRoom(game.window);
 
-        /*game.window.draw(poly1);
-        game.window.draw(poly2);
-        game.window.draw(poly3);
-        game.window.draw(poly4);
-        game.window.draw(poly5);
-        game.window.draw(poly6);
-        game.window.draw(poly7);
-        game.window.draw(poly8);
-        game.window.draw(poly9);
-        game.window.draw(poly10);
-        game.window.draw(poly11);
-        game.window.draw(poly12);
-        game.window.draw(poly13);
-        game.window.draw(poly14);
-        game.window.draw(poly15);*/
+        /*for (int i = 0; i < navMesh.polyList.size(); i++){
+            game.window.draw(navMesh.polyList[i].shape);
+        }*/
 
         game.window.draw(player.sprite);
         //game.window.draw(cursorLine, 2, sf::Lines);
         game.window.draw(cursor.sprite);
-
 
         game.window.display();
     }

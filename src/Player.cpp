@@ -62,7 +62,7 @@ void BRO::Player:: walk(unsigned int &resMultiplier, float &resMultiplierF, std:
     if (moveClock.getElapsedTime().asMilliseconds() > 10){
         sf::Vector2f direction = sf::Vector2f(moveTarget.x, moveTarget.y) - sprite.getPosition();
         float magnitude = sqrt((direction.x * direction.x) + (direction.y * direction.y));
-        sf::Vector2f unitVector((direction.x * 1.9f) / magnitude, direction.y / (magnitude * 1.9f));
+        sf::Vector2f unitVector((direction.x * 1.6f) / magnitude, direction.y / (magnitude * 1.6f));
 
         // player-movement
         sprite.move(unitVector * (sprite.getPosition().y / (resMultiplier * 130)) * resMultiplierF);
@@ -114,7 +114,12 @@ void BRO::Player::idle(){
 // handling all animations
 //------------------------------------
 void BRO::Player:: animate(unsigned int &resMultiplier, float &resMultiplierF){
-    if (round(moveTarget.x) != round(sprite.getPosition().x) && round(moveTarget.y) != round(sprite.getPosition().y)){
+    bool targetReached {round(moveTarget.x) + 1  > round(sprite.getPosition().x) - 1 &&
+            round(moveTarget.x) - 1 < round(sprite.getPosition().x) + 1 &&
+            round(moveTarget.y) + 1  > round(sprite.getPosition().y) - 1 &&
+            round(moveTarget.y) - 1 < round(sprite.getPosition().y) + 1};
+
+    if (! targetReached){
         walk(resMultiplier, resMultiplierF, spriteSheet);
     } else {
         idle();

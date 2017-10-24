@@ -18,27 +18,25 @@ namespace BRO{
     class Player {
     private:
         sf::Texture texture;
+
     public:
-
-        std::vector<BRO::PlayerAnimation> spriteSheet;
-
-        // init Objects
         sf::IntRect mask;
+
         sf::Sprite sprite;
         sf::Clock clock;
         sf::Vector2f moveTarget;
         sf::Clock moveClock;
 
+        std::vector<BRO::PlayerAnimation> spriteSheet;
+
         float positiveDirectionX;
         float positiveDirectionY;
 
-        // Constructor
         Player(const std::string &filePath, unsigned int &resMultiplier);
 
         void addAnimationToSheet(BRO::PlayerAnimation &spriteAnimation);
         BRO::PlayerAnimation getAnimationFromSheet(std::vector<BRO::PlayerAnimation> &spriteSheet, int animationID);
 
-        // Cycle through animation frames
         void iterateSprite(BRO::PlayerAnimation &spriteAnimation);
 
         void setTarget(sf::Vector2f coordinates);
