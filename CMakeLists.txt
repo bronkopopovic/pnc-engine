@@ -3,9 +3,8 @@ project(PNC_Engine)
 
 set(CMAKE_CXX_STANDARD 11)
 
+# Main Game Files
 set(SOURCE_FILES
-        characters/ch2.conf
-        rooms/studio.conf
         src/main.cpp
         src/Game.cpp
         src/Game.h
@@ -20,9 +19,17 @@ set(SOURCE_FILES
         src/Pathfinder.cpp
         src/Pathfinder.h
         src/Music.cpp
-        src/Music.h)
+        src/Music.h
+
+        # Character confs
+        characters/ch2.conf
+        characters/ch4.conf
+
+        # Room confs
+        rooms/studio.conf)
 
 configure_file(images/sprite_full.png sprite_full.png COPYONLY)
+configure_file(images/ch4_full.png ch4_full.png COPYONLY)
 configure_file(images/cursor.png cursor.png COPYONLY)
 configure_file(images/shop.png shop.png COPYONLY)
 configure_file(images/bedroom.png bedroom.png COPYONLY)

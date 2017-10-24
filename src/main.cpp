@@ -30,7 +30,8 @@ int main() {
     BRO::Cursor cursor;
     cursor.setScale(game.resMultiplier);
 
-    #include "../characters/ch2.conf"
+    //#include "../characters/ch2.conf"
+    #include "../characters/ch4.conf"
 
     player.sprite.setPosition(100 * game.resMultiplier, 100 * game.resMultiplier);
     player.sprite.setScale(game.resMultiplier, game.resMultiplier);
