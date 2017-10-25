@@ -45,6 +45,7 @@ configure_file(images/studio_pillar2.png studio_pillar2.png COPYONLY)
 configure_file(images/studio_pillar3.png studio_pillar3.png COPYONLY)
 configure_file(images/studio_pillar4.png studio_pillar4.png COPYONLY)
 configure_file(images/studio_pillar5.png studio_pillar5.png COPYONLY)
+configure_file(images/studio_foreground1.png studio_foreground1.png COPYONLY)
 
 # Music
 configure_file(music/track1.ogg track1.ogg COPYONLY)

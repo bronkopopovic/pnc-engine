@@ -100,6 +100,7 @@ int main() {
         //game.window.draw(cursorLine, 2, sf::Lines);
 
         studioRoom.drawDynamicObjects(studioRoom, game.window);
+        game.window.draw(studioRoom.foreground);
 
         //game.window.draw(player.sprite);
         game.window.draw(cursor.sprite);

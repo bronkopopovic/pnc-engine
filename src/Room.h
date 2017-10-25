@@ -16,7 +16,8 @@ namespace BRO{
 
     class Room{
     private:
-        sf::Texture texture;
+        sf::Texture baseLayerTexture;
+        sf::Texture foregroundTexture;
         bool isScrollable;
 
     public:
@@ -25,8 +26,7 @@ namespace BRO{
 
         sf::Sprite baseLayer;
         std::vector<sf::Sprite> objects;
-        sf::Sprite foreground1;
-        sf::Sprite foreground2;
+        sf::Sprite foreground;
 
         BRO::NavMesh navMesh;
 
@@ -34,7 +34,7 @@ namespace BRO{
         static bool compareY(const sf::Sprite &sprite1, const sf::Sprite &sprite2);
 
         // constructor
-        Room(const std::string &filePath, unsigned int &resMultiplier);
+        Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, unsigned int &resMultiplier);
 
         void scrollHorizontal(float playerPositionX, unsigned int &resMultiplier);
 

@@ -13,17 +13,20 @@ bool BRO::Room::compareY(const sf::Sprite &sprite1, const sf::Sprite &sprite2) {
     return sprite1.getPosition().y < sprite2.getPosition().y;
 }
 
-BRO::Room::Room(const std::string &filePath, unsigned int &resMultiplier){
+BRO::Room::Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, unsigned int &resMultiplier){
     mask.left = 0;
     mask.top = 0;
     mask.width = 320 * resMultiplier;
     mask.height = 200 * resMultiplier;
     view.reset(mask);
-    texture.loadFromFile(filePath);
-    baseLayer.setTexture(texture);
+    baseLayerTexture.loadFromFile(baseLayerTexturePath);
+    baseLayer.setTexture(baseLayerTexture);
     baseLayer.scale(resMultiplier, resMultiplier);
+    foregroundTexture.loadFromFile(foregroundTexturePath);
+    foreground.setTexture(foregroundTexture);
+    foreground.setScale(resMultiplier, resMultiplier);
     //cout << "size is " << texture.getSize().x << endl;
-    if (texture.getSize().x != mask.width || texture.getSize().y != mask.height){
+    if (baseLayerTexture.getSize().x != mask.width || baseLayerTexture.getSize().y != mask.height){
         isScrollable = true;
     } else {
         isScrollable = false;
@@ -32,7 +35,7 @@ BRO::Room::Room(const std::string &filePath, unsigned int &resMultiplier){
 
 void BRO::Room::scrollHorizontal(float playerPositionX, unsigned int &resMultiplier){
     if (isScrollable){
-        if (playerPositionX > mask.width + mask.left - 100 * resMultiplier && (texture.getSize().x - 1) * resMultiplier > mask.width + mask.left){
+        if (playerPositionX > mask.width + mask.left - 100 * resMultiplier && (baseLayerTexture.getSize().x - 1) * resMultiplier > mask.width + mask.left){
             mask.left += 1.5f * resMultiplier;
         } else if (playerPositionX < mask.left + 100 * resMultiplier && mask.left > 0){
             mask.left -= 1.5f * resMultiplier;
