@@ -40,11 +40,11 @@ configure_file(images/arcade.png arcade.png COPYONLY)
 
 # Studio Room
 configure_file(images/studio.png studio.png COPYONLY)
-configure_file(images/studio_column1.png studio_column1.png COPYONLY)
-configure_file(images/studio_column2.png studio_column2.png COPYONLY)
-configure_file(images/studio_column3.png studio_column3.png COPYONLY)
-configure_file(images/studio_column4.png studio_column4.png COPYONLY)
-configure_file(images/studio_column5.png studio_column5.png COPYONLY)
+configure_file(images/studio_pillar1.png studio_pillar1.png COPYONLY)
+configure_file(images/studio_pillar2.png studio_pillar2.png COPYONLY)
+configure_file(images/studio_pillar3.png studio_pillar3.png COPYONLY)
+configure_file(images/studio_pillar4.png studio_pillar4.png COPYONLY)
+configure_file(images/studio_pillar5.png studio_pillar5.png COPYONLY)
 
 # Music
 configure_file(music/track1.ogg track1.ogg COPYONLY)
