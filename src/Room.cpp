@@ -53,10 +53,10 @@ void BRO::Room::drawRoom(sf::RenderWindow &window){
     window.draw(baseLayer);
 }
 
-void BRO::Room::drawDynamicObjects(BRO::Room &room, sf::RenderWindow &window, int resMultiplier) {
+void BRO::Room::drawDynamicObjects(BRO::Room &room, sf::RenderWindow &window) {
     std::sort(room.dynamicObjects.begin(), room.dynamicObjects.end(), BRO::Room::compareY);
     for (int i = 0; i < room.dynamicObjects.size(); i++){
-        window.draw(room.dynamicObjects.at(i));
+        window.draw(room.dynamicObjects[i]);
     }
     room.dynamicObjects.clear();
 }
