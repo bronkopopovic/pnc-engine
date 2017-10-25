@@ -7,7 +7,7 @@ BRO::Cursor::Cursor(){
     sprite.setPosition(400, 400);
 }
 
-void BRO::Cursor::setScale(unsigned int &resMultiplier){
+void BRO::Cursor::setScale(int &resMultiplier){
     sprite.setScale(resMultiplier, resMultiplier);
 }
 

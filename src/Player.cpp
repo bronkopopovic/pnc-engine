@@ -3,7 +3,7 @@
 //---------------------------
 // Constructor
 //---------------------------
-BRO::Player::Player(const std::string &filePath, unsigned int &resMultiplier){
+BRO::Player::Player(const std::string &filePath, int &resMultiplier){
     mask.left = 0;
     mask.top = 0;
     mask.width = 64;
@@ -58,7 +58,7 @@ void BRO::Player:: setTarget(sf::Vector2f coordinates){
 //----------------------------------------------
 // walk-animations + sprite movement
 //----------------------------------------------
-void BRO::Player:: walk(unsigned int &resMultiplier, float &resMultiplierF, std::vector<BRO::PlayerAnimation> &spriteSheet){
+void BRO::Player:: walk(int &resMultiplier, float &resMultiplierF, std::vector<BRO::PlayerAnimation> &spriteSheet){
     if (moveClock.getElapsedTime().asMilliseconds() > 10){
         sf::Vector2f direction = sf::Vector2f(moveTarget.x, moveTarget.y) - sprite.getPosition();
         float magnitude = sqrt((direction.x * direction.x) + (direction.y * direction.y));
@@ -113,7 +113,7 @@ void BRO::Player::idle(){
 //------------------------------------
 // handling all animations
 //------------------------------------
-void BRO::Player:: animate(unsigned int &resMultiplier, float &resMultiplierF){
+void BRO::Player:: animate(int &resMultiplier, float &resMultiplierF){
     targetReached = round(moveTarget.x) + resMultiplier  > round(sprite.getPosition().x) - resMultiplier &&
             round(moveTarget.x) - resMultiplier < round(sprite.getPosition().x) + resMultiplier &&
             round(moveTarget.y) + resMultiplier  > round(sprite.getPosition().y) - resMultiplier &&

@@ -11,7 +11,7 @@ namespace BRO{
 
     public:
         sf::Sprite sprite;
-        RoomObject(const std::string filePath, float positionX, float positionY, int originX, int originY, unsigned int &resMultiplier);
+        RoomObject(const std::string filePath, float positionX, float positionY, int originX, int originY, int &resMultiplier);
     };
 
     class Room{
@@ -34,9 +34,9 @@ namespace BRO{
         static bool compareY(const sf::Sprite &sprite1, const sf::Sprite &sprite2);
 
         // constructor
-        Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, unsigned int &resMultiplier);
+        Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, int &resMultiplier);
 
-        void scrollHorizontal(float playerPositionX, unsigned int &resMultiplier);
+        void scrollHorizontal(float playerPositionX, int &resMultiplier);
 
         void setNavMesh(const BRO::NavMesh &_navMesh);
 

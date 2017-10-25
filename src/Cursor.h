@@ -12,7 +12,7 @@ namespace BRO{
 
         Cursor();
 
-        void setScale(unsigned int &resMultiplier);
+        void setScale(int &resMultiplier);
 
         void update(sf::Vector2f coordinates);
 

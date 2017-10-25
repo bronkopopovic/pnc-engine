@@ -1,7 +1,7 @@
 #include "Room.h"
 
 BRO::RoomObject::RoomObject(const std::string filePath, float positionX, float positionY, int originX, int originY,
-                            unsigned int &resMultiplier) {
+                            int &resMultiplier) {
     texture.loadFromFile(filePath);
     sprite.setTexture(texture);
     sprite.setOrigin(originX, originY);
@@ -13,7 +13,7 @@ bool BRO::Room::compareY(const sf::Sprite &sprite1, const sf::Sprite &sprite2) {
     return sprite1.getPosition().y < sprite2.getPosition().y;
 }
 
-BRO::Room::Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, unsigned int &resMultiplier){
+BRO::Room::Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, int &resMultiplier){
     mask.left = 0;
     mask.top = 0;
     mask.width = 320 * resMultiplier;
@@ -33,12 +33,14 @@ BRO::Room::Room(const std::string &baseLayerTexturePath, const std::string &fore
     }
 }
 
-void BRO::Room::scrollHorizontal(float playerPositionX, unsigned int &resMultiplier){
+void BRO::Room::scrollHorizontal(float playerPositionX, int &resMultiplier){
     if (isScrollable){
         if (playerPositionX > mask.width + mask.left - 100 * resMultiplier && (baseLayerTexture.getSize().x - 1) * resMultiplier > mask.width + mask.left){
             mask.left += 1.5f * resMultiplier;
+            foreground.move(sf::Vector2f(- resMultiplier, 0));
         } else if (playerPositionX < mask.left + 100 * resMultiplier && mask.left > 0){
             mask.left -= 1.5f * resMultiplier;
+            foreground.move(sf::Vector2f(resMultiplier, 0));
         }
     }
 }

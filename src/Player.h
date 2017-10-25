@@ -33,7 +33,7 @@ namespace BRO{
         float positiveDirectionX;
         float positiveDirectionY;
 
-        Player(const std::string &filePath, unsigned int &resMultiplier);
+        Player(const std::string &filePath, int &resMultiplier);
 
         void addAnimationToSheet(BRO::PlayerAnimation &spriteAnimation);
         BRO::PlayerAnimation getAnimationFromSheet(std::vector<BRO::PlayerAnimation> &spriteSheet, int animationID);
@@ -42,11 +42,11 @@ namespace BRO{
 
         void setTarget(sf::Vector2f coordinates);
 
-        void walk(unsigned int &resMultiplier, float &resMultiplierF, std::vector<BRO::PlayerAnimation> &spriteSheet);
+        void walk(int &resMultiplier, float &resMultiplierF, std::vector<BRO::PlayerAnimation> &spriteSheet);
 
         void idle();
 
-        void animate(unsigned int &resMultiplier, float &resMultiplierF);
+        void animate(int &resMultiplier, float &resMultiplierF);
 
         int getPositionX();
     };

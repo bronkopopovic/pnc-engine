@@ -11,12 +11,12 @@
 namespace BRO{
     class Game {
     public:
-        unsigned int resMultiplier;
+        int resMultiplier;
         float resMultiplierF;
 
         sf::RenderWindow window;
 
-        void setResMultiplier(unsigned int multiplier);
+        void setResMultiplier(int multiplier);
 
     };
 
