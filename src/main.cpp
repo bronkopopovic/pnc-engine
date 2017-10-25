@@ -99,7 +99,7 @@ int main() {
 
         //game.window.draw(cursorLine, 2, sf::Lines);
 
-        studioRoom.drawDynamicObjects(studioRoom, player.sprite, game.window, game.resMultiplier);
+        studioRoom.drawDynamicObjects(studioRoom, game.window, game.resMultiplier);
 
         //game.window.draw(player.sprite);
         game.window.draw(cursor.sprite);

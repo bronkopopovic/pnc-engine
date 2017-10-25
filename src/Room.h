@@ -44,7 +44,7 @@ namespace BRO{
 
         void drawRoom(sf::RenderWindow &window);
 
-        void drawDynamicObjects(BRO::Room &room, sf::Sprite &playerSprite, sf::RenderWindow &window, int resMultiplier);
+        void drawDynamicObjects(BRO::Room &room, sf::RenderWindow &window, int resMultiplier);
     };
 }
 
