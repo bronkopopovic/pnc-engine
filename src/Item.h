@@ -11,7 +11,7 @@ namespace BRO{
     public:
         sf::Sprite sprite;
 
-        Item(const std::string filePath, float positionX, float positionY, unsigned int &resMultiplier);
+        Item(std::string filePath, float positionX, float positionY, unsigned int &resMultiplier);
     };
 }
 

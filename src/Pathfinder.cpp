@@ -5,10 +5,6 @@ void BRO::Node::addAdjacency(Node &node) {
     adjacencyList.push_back(node);
 }
 
-float BRO::Node::calculateF(float H, float G){
-    return H + G;
-}
-
 void BRO::Node::setCoords(float xCoord, float yCoord) {
     x = xCoord;
     y = yCoord;
@@ -86,11 +82,17 @@ float BRO::Pathfinder::pointToPointDistance(BRO::Node &node1, BRO::Node &node2) 
     return std::sqrt(((node1.x - node2.x)*(node1.x - node2.x)) + ((node1.y - node2.y)*(node1.y - node2.y)));
 }
 
+float BRO::Pathfinder::calculateF(BRO::Node &startNode, BRO::Node &adjacentNode, BRO::Node &endNode){
+    return pointToPointDistance(adjacentNode, endNode) + pointToPointDistance(startNode, adjacentNode);
+}
+
 void BRO::Pathfinder::getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window){
 
     // Calculate start Node with playerPosition
     startNodeI = isInsidePolygon(navMesh, player, window, player.sprite.getPosition());
     startNode = navMesh.polyList[startNodeI].node;
+    endNodeI = isInsidePolygon(navMesh, player, window, cursor.sprite.getPosition());
+    endNode = navMesh.polyList[endNodeI].node;
 
     // Push startNode to open List
     openList.push_back(startNode);
@@ -105,8 +107,8 @@ void BRO::Pathfinder::getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BR
     openList.erase(openList.begin());
     closedList.push_back(startNode);
 
-    /*for (int i = 0; i < openList.size(); i++){
-        openList[i].F = BRO::Node::calculateF(openList[i].);
-    }*/
-
+    for (int i = 0; i < openList.size(); i++){
+        openList[i].F = calculateF(startNode, openList[i], endNode);
+    }
+    //closedList.push_back(std::min_element(openList))
 }

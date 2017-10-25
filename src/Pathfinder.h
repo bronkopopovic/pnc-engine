@@ -27,8 +27,6 @@ namespace BRO{
 
         void addAdjacency(Node &node);
 
-        static float calculateF(float H, float G);
-
         void setCoords(float xCoord, float yCoord);
     };
 
@@ -70,6 +68,7 @@ namespace BRO{
 
         // A-star algorithm for polygon preselection
         static float pointToPointDistance(BRO::Node &node1, BRO::Node &node2);
+        float calculateF(BRO::Node &node, BRO::Node &adjacentNode, BRO::Node &endNode);
 
         std::vector<BRO::Node> openList;
         std::vector<BRO::Node> closedList;
@@ -77,6 +76,7 @@ namespace BRO{
 
         int startNodeI;
         BRO::Node startNode;
+        int endNodeI;
         BRO::Node endNode;
 
         void getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window);

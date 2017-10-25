@@ -28,13 +28,25 @@ set(SOURCE_FILES
         # Room confs
         rooms/studio.conf)
 
+# Players
 configure_file(images/sprite_full.png sprite_full.png COPYONLY)
 configure_file(images/ch4_full.png ch4_full.png COPYONLY)
+
+# Stuff
 configure_file(images/cursor.png cursor.png COPYONLY)
 configure_file(images/shop.png shop.png COPYONLY)
 configure_file(images/bedroom.png bedroom.png COPYONLY)
 configure_file(images/arcade.png arcade.png COPYONLY)
+
+# Studio Room
 configure_file(images/studio.png studio.png COPYONLY)
+configure_file(images/studio_column1.png studio_column1.png COPYONLY)
+configure_file(images/studio_column2.png studio_column2.png COPYONLY)
+configure_file(images/studio_column3.png studio_column3.png COPYONLY)
+configure_file(images/studio_column4.png studio_column4.png COPYONLY)
+configure_file(images/studio_column5.png studio_column5.png COPYONLY)
+
+# Music
 configure_file(music/track1.ogg track1.ogg COPYONLY)
 configure_file(music/track2.ogg track2.ogg COPYONLY)
 

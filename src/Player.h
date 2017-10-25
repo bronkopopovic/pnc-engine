@@ -25,6 +25,7 @@ namespace BRO{
         sf::Sprite sprite;
         sf::Clock clock;
         sf::Vector2f moveTarget;
+        bool targetReached;
         sf::Clock moveClock;
 
         std::vector<BRO::PlayerAnimation> spriteSheet;

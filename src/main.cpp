@@ -25,7 +25,6 @@ int main() {
     game.window.setMouseCursorVisible(false);
     //BRO::World world;
     //world.initStudioRoom(game.resMultiplier);
-    BRO::Room studioRoom("studio.png", game.resMultiplier);
 
     BRO::Cursor cursor;
     cursor.setScale(game.resMultiplier);
@@ -33,11 +32,10 @@ int main() {
     //#include "../characters/ch2.conf"
     #include "../characters/ch4.conf"
 
-    player.sprite.setPosition(120 * game.resMultiplier, 120 * game.resMultiplier);
+    player.sprite.setPosition(120 * game.resMultiplier, 100 * game.resMultiplier);
     player.sprite.setScale(game.resMultiplier, game.resMultiplier);
     player.setTarget(sf::Vector2f(120 * game.resMultiplier, 100 * game.resMultiplier));
 
-    BRO::Room currentRoom = studioRoom;
     BRO::Player currentPlayer = player;
 
     BRO::Music track1("track2.ogg");
@@ -65,6 +63,13 @@ int main() {
 
         player.animate(game.resMultiplier, game.resMultiplierF);
 
+        studioRoom.addDynamicObject(studio_pillar1.sprite);
+        studioRoom.addDynamicObject(studio_pillar2.sprite);
+        studioRoom.addDynamicObject(studio_pillar3.sprite);
+        studioRoom.addDynamicObject(studio_pillar4.sprite);
+        studioRoom.addDynamicObject(studio_pillar5.sprite);
+        studioRoom.addDynamicObject(player.sprite);
+
         cursor.update(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
 
         bool clickedInWindow (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
@@ -80,19 +85,23 @@ int main() {
             }
         }
 
-        currentRoom.scrollHorizontal(player.sprite.getPosition().x, game.resMultiplier);
-        currentRoom.view.reset(currentRoom.mask);
+        studioRoom.scrollHorizontal(player.sprite.getPosition().x, game.resMultiplier);
+        studioRoom.view.reset(studioRoom.mask);
 
         game.window.clear(sf::Color::Black);
 
-        currentRoom.drawRoom(game.window);
+        studioRoom.drawRoom(game.window);
+
 
         /*for (int i = 0; i < navMesh.polyList.size(); i++){
             game.window.draw(navMesh.polyList[i].shape);
         }*/
 
-        game.window.draw(player.sprite);
         //game.window.draw(cursorLine, 2, sf::Lines);
+
+        studioRoom.drawDynamicObjects(studioRoom, player.sprite, game.window, game.resMultiplier);
+
+        //game.window.draw(player.sprite);
         game.window.draw(cursor.sprite);
 
         game.window.display();

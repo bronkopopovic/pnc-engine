@@ -1,5 +1,18 @@
 #include "Room.h"
 
+BRO::RoomObject::RoomObject(const std::string filePath, float positionX, float positionY, int originX, int originY,
+                            unsigned int &resMultiplier) {
+    texture.loadFromFile(filePath);
+    sprite.setTexture(texture);
+    sprite.setOrigin(originX, originY);
+    sprite.scale(resMultiplier, resMultiplier);
+    sprite.setPosition(positionX, positionY);
+}
+
+bool BRO::Room::compareY(const sf::Sprite &sprite1, const sf::Sprite &sprite2) {
+    return sprite1.getPosition().y < sprite2.getPosition().y;
+}
+
 BRO::Room::Room(const std::string &filePath, unsigned int &resMultiplier){
     mask.left = 0;
     mask.top = 0;
@@ -7,20 +20,14 @@ BRO::Room::Room(const std::string &filePath, unsigned int &resMultiplier){
     mask.height = 200 * resMultiplier;
     view.reset(mask);
     texture.loadFromFile(filePath);
-    sprite.setTexture(texture);
-    sprite.scale(resMultiplier, resMultiplier);
+    baseLayer.setTexture(texture);
+    baseLayer.scale(resMultiplier, resMultiplier);
     //cout << "size is " << texture.getSize().x << endl;
     if (texture.getSize().x != mask.width || texture.getSize().y != mask.height){
         isScrollable = true;
     } else {
         isScrollable = false;
     }
-    // draw pathfinding shapes for debugging
-    drawShapes = true;
-}
-
-void BRO::Room::setShape(int shapeIndex, sf::ConvexShape &shape){
-    shapes[shapeIndex] = shape;
 }
 
 void BRO::Room::scrollHorizontal(float playerPositionX, unsigned int &resMultiplier){
@@ -37,13 +44,19 @@ void BRO::Room::setNavMesh(const BRO::NavMesh &_navMesh){
     navMesh = _navMesh;
 }
 
+void BRO::Room::addDynamicObject(sf::Sprite &sprite) {
+    dynamicObjects.push_back(sprite);
+}
+
 void BRO::Room::drawRoom(sf::RenderWindow &window){
     window.setView(view);
-    window.draw(sprite);
+    window.draw(baseLayer);
+}
 
-    if (drawShapes){
-        for (int i=0; i < 20; i++){
-            window.draw(shapes[i]);
-        }
+void BRO::Room::drawDynamicObjects(BRO::Room &room, sf::Sprite &playerSprite, sf::RenderWindow &window, int resMultiplier) {
+    std::sort(room.dynamicObjects.begin(), room.dynamicObjects.end(), BRO::Room::compareY);
+    for (int i = 0; i < room.dynamicObjects.size(); i++){
+        window.draw(room.dynamicObjects.at(i));
     }
+    room.dynamicObjects.clear();
 }
