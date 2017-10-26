@@ -4,6 +4,7 @@
 using namespace std;
 
 int main() {
+
     BRO::Game game;
 
     static sf::Event event;
@@ -29,8 +30,8 @@ int main() {
     BRO::Cursor cursor;
     cursor.setScale(game.resMultiplier);
 
-    //#include "../characters/ch2.conf"
-    #include "../characters/ch4.conf"
+    #include "../characters/ch2.conf"
+    //#include "../characters/ch4.conf"
 
     player.sprite.setPosition(120 * game.resMultiplier, 100 * game.resMultiplier);
     player.sprite.setScale(game.resMultiplier, game.resMultiplier);
@@ -63,13 +64,6 @@ int main() {
 
         player.animate(game.resMultiplier, game.resMultiplierF);
 
-        studioRoom.addDynamicObject(studio_pillar1.sprite);
-        studioRoom.addDynamicObject(studio_pillar2.sprite);
-        studioRoom.addDynamicObject(studio_pillar3.sprite);
-        studioRoom.addDynamicObject(studio_pillar4.sprite);
-        studioRoom.addDynamicObject(studio_pillar5.sprite);
-        studioRoom.addDynamicObject(player.sprite);
-
         cursor.update(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
 
         bool clickedInWindow (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
@@ -85,6 +79,13 @@ int main() {
             }
         }
 
+        studioRoom.addDynamicObject(studio_pillar1.sprite);
+        studioRoom.addDynamicObject(studio_pillar2.sprite);
+        studioRoom.addDynamicObject(studio_pillar3.sprite);
+        studioRoom.addDynamicObject(studio_pillar4.sprite);
+        studioRoom.addDynamicObject(studio_pillar5.sprite);
+        studioRoom.addDynamicObject(player.sprite);
+
         studioRoom.scrollHorizontal(player.sprite.getPosition().x, game.resMultiplier);
         studioRoom.view.reset(studioRoom.mask);
 
@@ -92,10 +93,9 @@ int main() {
 
         studioRoom.drawRoom(game.window);
 
-
-        /*for (int i = 0; i < navMesh.polyList.size(); i++){
+        for (int i = 0; i < navMesh.polyList.size(); i++){
             game.window.draw(navMesh.polyList[i].shape);
-        }*/
+        }
 
         //game.window.draw(cursorLine, 2, sf::Lines);
 

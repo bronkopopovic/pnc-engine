@@ -59,9 +59,9 @@ void BRO::Room::drawRoom(sf::RenderWindow &window){
 }
 
 void BRO::Room::drawDynamicObjects(BRO::Room &room, sf::RenderWindow &window) {
-    std::sort(room.dynamicObjects.begin(), room.dynamicObjects.end(), BRO::Room::compareY);
-    for (int i = 0; i < room.dynamicObjects.size(); i++){
-        window.draw(room.dynamicObjects[i]);
+    std::sort(dynamicObjects.begin(), room.dynamicObjects.end(), BRO::Room::compareY);
+    for (int i = 0; i < dynamicObjects.size(); i++){
+        window.draw(dynamicObjects[i]);
     }
-    room.dynamicObjects.clear();
+    dynamicObjects.clear();
 }

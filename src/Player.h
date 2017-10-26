@@ -5,8 +5,8 @@
 #include <cmath>
 
 namespace BRO{
-    class PlayerAnimation {
-    public:
+
+    struct PlayerAnimation {
         int animationID;
         int top;
         int startLeft;

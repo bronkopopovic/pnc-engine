@@ -114,7 +114,8 @@ void BRO::Player::idle(){
 // handling all animations
 //------------------------------------
 void BRO::Player:: animate(int &resMultiplier, float &resMultiplierF){
-    targetReached = round(moveTarget.x) + resMultiplier  > round(sprite.getPosition().x) - resMultiplier &&
+    targetReached =
+            round(moveTarget.x) + resMultiplier  > round(sprite.getPosition().x) - resMultiplier &&
             round(moveTarget.x) - resMultiplier < round(sprite.getPosition().x) + resMultiplier &&
             round(moveTarget.y) + resMultiplier  > round(sprite.getPosition().y) - resMultiplier &&
             round(moveTarget.y) - resMultiplier < round(sprite.getPosition().y) + resMultiplier;
