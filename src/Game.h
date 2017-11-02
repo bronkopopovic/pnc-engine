@@ -18,6 +18,9 @@ namespace BRO{
 
         void setResMultiplier(int multiplier);
 
+        // pointer to current room
+        BRO::Room* currentRoom;
+
     };
 
     enum class GameStates{

@@ -5,6 +5,9 @@
 #include "Pathfinder.h"
 
 namespace BRO{
+    //--------------------
+    // ROOM OBJECTS
+    //--------------------
     class RoomObject{
     private:
         sf::Texture texture;
@@ -14,6 +17,9 @@ namespace BRO{
         RoomObject(const std::string filePath, float positionX, float positionY, int originX, int originY, int &resMultiplier);
     };
 
+    //--------------------
+    // ROOMS
+    //--------------------
     class Room{
     private:
         sf::Texture baseLayerTexture;
@@ -24,13 +30,19 @@ namespace BRO{
         sf::View view;
         sf::FloatRect mask;
 
+        // textures and objects
         sf::Sprite baseLayer;
-        std::vector<sf::Sprite> objects;
         sf::Sprite foreground;
-
-        BRO::NavMesh navMesh;
-
         std::vector<sf::Sprite> dynamicObjects;
+
+        // current player pointer
+        BRO::Player* player;
+
+        // idle player pointers
+        std::vector<BRO::Player*> idlePlayers;
+
+        // Nav Mesh stuff
+        BRO::NavMesh navMesh;
         static bool compareY(const sf::Sprite &sprite1, const sf::Sprite &sprite2);
 
         // constructor
