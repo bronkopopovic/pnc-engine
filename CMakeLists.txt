@@ -20,17 +20,23 @@ set(SOURCE_FILES
         src/Pathfinder.h
         src/Music.cpp
         src/Music.h
+        src/hud.cpp
+        src/hud.h
 
         # Character confs
         characters/ch2.conf
         characters/ch4.conf
 
         # Room confs
-        rooms/studio.conf)
+        rooms/studio.conf
+        )
 
 # Players
 configure_file(images/sprite_full.png sprite_full.png COPYONLY)
+configure_file(images/ch2_ico.png ch2_ico.png COPYONLY)
 configure_file(images/ch4_full.png ch4_full.png COPYONLY)
+configure_file(images/ch4_ico.png ch4_ico.png COPYONLY)
+
 
 # Stuff
 configure_file(images/cursor.png cursor.png COPYONLY)

@@ -7,6 +7,7 @@
 #include "Room.h"
 #include "Item.h"
 #include "Music.h"
+#include "hud.h"
 
 namespace BRO{
     class Game {

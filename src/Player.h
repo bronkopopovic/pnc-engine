@@ -7,11 +7,7 @@
 namespace BRO{
 
     struct PlayerAnimation {
-        int animationID;
-        int top;
-        int startLeft;
-        int maxLeft;
-        int incrementLeft;
+        int animationID, top, startLeft, maxLeft, incrementLeft;
         float speed;
     };
 
@@ -19,19 +15,22 @@ namespace BRO{
     private:
         sf::Texture texture;
 
+        void walk(int &resMultiplier, float &resMultiplierF);
+
+        void idle();
+
     public:
         sf::IntRect mask;
-
         sf::Sprite sprite;
-        sf::Clock clock;
+
+        sf::Clock clock, moveClock;
+
         sf::Vector2f moveTarget;
         bool targetReached;
-        sf::Clock moveClock;
 
         std::vector<BRO::PlayerAnimation> spriteSheet;
 
-        float positiveDirectionX;
-        float positiveDirectionY;
+        float positiveDirectionX, positiveDirectionY;
 
         Player(const std::string &filePath, int &resMultiplier);
 
@@ -41,10 +40,6 @@ namespace BRO{
         void iterateSprite(BRO::PlayerAnimation &spriteAnimation);
 
         void setTarget(sf::Vector2f coordinates);
-
-        void walk(int &resMultiplier, float &resMultiplierF, std::vector<BRO::PlayerAnimation> &spriteSheet);
-
-        void idle();
 
         void animate(int &resMultiplier, float &resMultiplierF);
 

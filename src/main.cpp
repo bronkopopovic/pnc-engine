@@ -5,6 +5,9 @@ using namespace std;
 
 int main() {
 
+    //-------------------------------
+    // Basic Setup
+    //-------------------------------
     BRO::Game game;
 
     static sf::Event event;
@@ -21,18 +24,30 @@ int main() {
     // 9 = 2880x1800
     game.setResMultiplier(6);
 
+    //-------------------------------
+    // Window
+    //-------------------------------
     game.window.create(sf::VideoMode(320 * game.resMultiplier, 200 * game.resMultiplier, 32), "PNC Engine", sf::Style::Titlebar | sf::Style::Close);
     game.window.setFramerateLimit(60);
     game.window.setMouseCursorVisible(false);
     //BRO::World world;
     //world.initStudioRoom(game.resMultiplier);
 
+    //-------------------------------
+    // Cursor
+    //-------------------------------
     BRO::Cursor cursor;
     cursor.setScale(game.resMultiplier);
 
+    //-------------------------------
+    // Player Configs
+    //-------------------------------
     #include "../characters/ch2.conf"
     #include "../characters/ch4.conf"
 
+    //-------------------------------
+    // Player Positions
+    //-------------------------------
     ch2.sprite.setPosition(120 * game.resMultiplier, 100 * game.resMultiplier);
     ch2.sprite.setScale(game.resMultiplier, game.resMultiplier);
     ch2.setTarget(sf::Vector2f(120 * game.resMultiplier, 100 * game.resMultiplier));
@@ -41,21 +56,51 @@ int main() {
     ch4.sprite.setScale(game.resMultiplier, game.resMultiplier);
     ch4.setTarget(sf::Vector2f(190 * game.resMultiplier, 100 * game.resMultiplier));
 
-    BRO::Music track1("track2.ogg");
-    track1.audio.setVolume(40);
-
-    BRO::Pathfinder pathfinder;
-
+    //-------------------------------
+    // Room Conf
+    //-------------------------------
     #include "../rooms/studio.conf"
 
-    game.currentRoom = &studioRoom;
-    game.currentRoom->player = &ch2;
-    game.currentRoom->idlePlayers.push_back(&ch4);
+    //-------------------------------
+    // Pathfinder
+    //-------------------------------
+    BRO::Pathfinder pathfinder;
 
     sf::Vertex cursorLine[2];
     cursorLine[0].color = sf::Color(255,255,255);
     cursorLine[1].color = sf::Color(255,255,255);
 
+    //-------------------------------
+    // HUD
+    //-------------------------------
+    BRO::Hud hud;
+    BRO::PlayerIcon ch2Icon("ch2_ico.png", 4, game.window, game.resMultiplier);
+    BRO::PlayerIcon ch4Icon("ch4_ico.png", 30, game.window, game.resMultiplier);
+    hud.playerIcons.push_back(&ch2Icon);
+    hud.playerIcons.push_back(&ch4Icon);
+    ch4Icon.setActive(false);
+
+    //-------------------------------
+    // Music
+    //-------------------------------
+    BRO::Music track1("track2.ogg");
+    track1.audio.setVolume(40);
+
+    //-------------------------------
+    // set all the Pointers
+    //-------------------------------
+    game.currentRoom = &studioRoom;
+    game.currentRoom->currentPlayer = &ch2;
+    game.currentRoom->idlePlayers.push_back(&ch4);
+
+    game.currentRoom->addDynamicObject(game.currentRoom->currentPlayer->sprite);
+    for (int i = 0; i < game.currentRoom->idlePlayers.size(); i++){
+        game.currentRoom->addDynamicObject(game.currentRoom->idlePlayers[i]->sprite);
+    }
+
+    //-------------------------------
+    // Game LOOOOOOOOP
+    //-------------------------------
     while(game.window.isOpen()){
         while(game.window.pollEvent(event)) {
             if(event.type == sf::Event::Closed){
@@ -63,16 +108,28 @@ int main() {
             }
         }
 
-        cursorLine[0].position = sf::Vector2f(game.currentRoom->player->sprite.getPosition().x, 0);
+        //-------------------------------
+        // set cursor-line points
+        //-------------------------------
+        cursorLine[0].position = sf::Vector2f(game.currentRoom->currentPlayer->sprite.getPosition().x, 0);
         cursorLine[1].position = cursor.sprite.getPosition();
 
+        //-------------------------------
+        // music loop
+        //-------------------------------
         track1.loop();
 
-        game.currentRoom->player->animate(game.resMultiplier, game.resMultiplierF);
+        //-------------------------------
+        // handle animations
+        //-------------------------------
+        game.currentRoom->currentPlayer->animate(game.resMultiplier, game.resMultiplierF);
         for (int i = 0; i < game.currentRoom->idlePlayers.size(); i++){
             game.currentRoom->idlePlayers[i]->animate(game.resMultiplier, game.resMultiplierF);
         }
 
+        //-------------------------------
+        // handle cursor
+        //-------------------------------
         cursor.update(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
 
         bool clickedInWindow (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
@@ -81,37 +138,45 @@ int main() {
             sf::Mouse::getPosition(game.window).x >= 0 &&
             sf::Mouse::getPosition(game.window).y >= 0);
 
+        //-------------------------------
+        // Click Events
+        //-------------------------------
         if(clickedInWindow){
             cout << "click" << endl;
-            if (pathfinder.isInsidePolygon(navMesh, *game.currentRoom->player, game.window, cursor.sprite.getPosition()) != -1){
-                game.currentRoom->player->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
+            if (pathfinder.isInsidePolygon(navMesh, *game.currentRoom->currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
+                game.currentRoom->currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
+            }
+            if (ch2Icon.mask.contains(sf::Vector2i(cursor.sprite.getPosition().x, cursor.sprite.getPosition().y))){
+                cout << "blaaaaaaaaa" << endl;
             }
         }
 
-        game.currentRoom->addDynamicObject(studio_pillar1.sprite);
-        game.currentRoom->addDynamicObject(studio_pillar2.sprite);
-        game.currentRoom->addDynamicObject(studio_pillar3.sprite);
-        game.currentRoom->addDynamicObject(studio_pillar4.sprite);
-        game.currentRoom->addDynamicObject(studio_pillar5.sprite);
-        game.currentRoom->addDynamicObject(game.currentRoom->player->sprite);
-        for (int i = 0; i < game.currentRoom->idlePlayers.size(); i++){
-            game.currentRoom->addDynamicObject(game.currentRoom->idlePlayers[i]->sprite);
-        }
-
-        game.currentRoom->scrollHorizontal(game.currentRoom->player->sprite.getPosition().x, game.resMultiplier);
+        //-------------------------------
+        // handle room view
+        //-------------------------------
+        game.currentRoom->scrollHorizontal(game.currentRoom->currentPlayer->sprite.getPosition().x, game.resMultiplier);
         game.currentRoom->view.reset(game.currentRoom->mask);
 
+        //-------------------------------
+        // draw all the stuff
+        //-------------------------------
         game.currentRoom->drawRoom(game.window);
 
+        // cursor line
         //game.window.draw(cursorLine, 2, sf::Lines);
 
         game.currentRoom->drawDynamicObjects(*game.currentRoom, game.window);
         game.window.draw(game.currentRoom->foreground);
 
+        // navMesh
         /*for (int i = 0; i < navMesh.polyList.size(); i++){
             game.window.draw(navMesh.polyList[i].shape);
         }*/
 
+        game.window.setView(game.window.getDefaultView());
+        hud.drawHud(game.window);
+
+        game.window.setView(game.currentRoom->view);
         game.window.draw(cursor.sprite);
 
         game.window.display();

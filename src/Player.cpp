@@ -58,7 +58,7 @@ void BRO::Player:: setTarget(sf::Vector2f coordinates){
 //----------------------------------------------
 // walk-animations + sprite movement
 //----------------------------------------------
-void BRO::Player:: walk(int &resMultiplier, float &resMultiplierF, std::vector<BRO::PlayerAnimation> &spriteSheet){
+void BRO::Player:: walk(int &resMultiplier, float &resMultiplierF){
     if (moveClock.getElapsedTime().asMilliseconds() > 10){
         sf::Vector2f direction = sf::Vector2f(moveTarget.x, moveTarget.y) - sprite.getPosition();
         float magnitude = sqrt((direction.x * direction.x) + (direction.y * direction.y));
@@ -121,7 +121,7 @@ void BRO::Player:: animate(int &resMultiplier, float &resMultiplierF){
             round(moveTarget.y) - resMultiplier < round(sprite.getPosition().y) + resMultiplier;
 
     if (! targetReached){
-        walk(resMultiplier, resMultiplierF, spriteSheet);
+        walk(resMultiplier, resMultiplierF);
     } else {
         idle();
     }

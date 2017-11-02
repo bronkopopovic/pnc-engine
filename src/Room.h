@@ -33,17 +33,17 @@ namespace BRO{
         // textures and objects
         sf::Sprite baseLayer;
         sf::Sprite foreground;
-        std::vector<sf::Sprite> dynamicObjects;
+        std::vector<sf::Sprite*> dynamicObjects;
 
         // current player pointer
-        BRO::Player* player;
+        BRO::Player* currentPlayer;
 
         // idle player pointers
         std::vector<BRO::Player*> idlePlayers;
 
         // Nav Mesh stuff
         BRO::NavMesh navMesh;
-        static bool compareY(const sf::Sprite &sprite1, const sf::Sprite &sprite2);
+        static bool compareY(const sf::Sprite *sprite1, const sf::Sprite *sprite2);
 
         // constructor
         Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, int &resMultiplier);

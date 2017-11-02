@@ -9,8 +9,8 @@ BRO::RoomObject::RoomObject(const std::string filePath, float positionX, float p
     sprite.setPosition(positionX, positionY);
 }
 
-bool BRO::Room::compareY(const sf::Sprite &sprite1, const sf::Sprite &sprite2) {
-    return sprite1.getPosition().y < sprite2.getPosition().y;
+bool BRO::Room::compareY(const sf::Sprite *sprite1, const sf::Sprite *sprite2) {
+    return sprite1->getPosition().y < sprite2->getPosition().y;
 }
 
 BRO::Room::Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, int &resMultiplier){
@@ -50,7 +50,7 @@ void BRO::Room::setNavMesh(const BRO::NavMesh &_navMesh){
 }
 
 void BRO::Room::addDynamicObject(sf::Sprite &sprite) {
-    dynamicObjects.push_back(sprite);
+    dynamicObjects.push_back(&sprite);
 }
 
 void BRO::Room::drawRoom(sf::RenderWindow &window){
@@ -61,7 +61,6 @@ void BRO::Room::drawRoom(sf::RenderWindow &window){
 void BRO::Room::drawDynamicObjects(BRO::Room &room, sf::RenderWindow &window) {
     std::sort(dynamicObjects.begin(), room.dynamicObjects.end(), BRO::Room::compareY);
     for (int i = 0; i < dynamicObjects.size(); i++){
-        window.draw(dynamicObjects[i]);
+        window.draw(*dynamicObjects[i]);
     }
-    dynamicObjects.clear();
 }
