@@ -74,11 +74,18 @@ int main() {
     // HUD
     //-------------------------------
     BRO::Hud hud;
+
     BRO::PlayerIcon ch2Icon("ch2_ico.png", 4, game.window, game.resMultiplier);
     BRO::PlayerIcon ch4Icon("ch4_ico.png", 30, game.window, game.resMultiplier);
+
     hud.playerIcons.push_back(&ch2Icon);
     hud.playerIcons.push_back(&ch4Icon);
+
+    ch2Icon.setActive(true);
     ch4Icon.setActive(false);
+
+    ch2Icon.linkedPlayer = &ch2;
+    ch4Icon.linkedPlayer = &ch4;
 
     //-------------------------------
     // Music
@@ -90,8 +97,16 @@ int main() {
     // set all the Pointers
     //-------------------------------
     game.currentRoom = &studioRoom;
-    game.currentRoom->currentPlayer = &ch2;
-    game.currentRoom->idlePlayers.push_back(&ch4);
+
+    game.currentCursor = &cursor;
+
+    for (int i = 0; i < hud.playerIcons.size(); i++){
+        if (hud.playerIcons[i]->isActive){
+            game.currentRoom->currentPlayer = hud.playerIcons[i]->linkedPlayer;
+        } else {
+            game.currentRoom->idlePlayers.push_back(hud.playerIcons[i]->linkedPlayer);
+        }
+    }
 
     game.currentRoom->addDynamicObject(game.currentRoom->currentPlayer->sprite);
     for (int i = 0; i < game.currentRoom->idlePlayers.size(); i++){
@@ -117,7 +132,7 @@ int main() {
         //-------------------------------
         // music loop
         //-------------------------------
-        track1.loop();
+        //track1.loop();
 
         //-------------------------------
         // handle animations
@@ -146,9 +161,7 @@ int main() {
             if (pathfinder.isInsidePolygon(navMesh, *game.currentRoom->currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
                 game.currentRoom->currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
             }
-            if (ch2Icon.mask.contains(sf::Vector2i(cursor.sprite.getPosition().x, cursor.sprite.getPosition().y))){
-                cout << "blaaaaaaaaa" << endl;
-            }
+            game.playerSwitcher(game, hud);
         }
 
         //-------------------------------
@@ -178,6 +191,7 @@ int main() {
 
         game.window.setView(game.currentRoom->view);
         game.window.draw(cursor.sprite);
+
 
         game.window.display();
     }

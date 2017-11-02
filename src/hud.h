@@ -6,6 +6,7 @@
 #define PNC_ENGINE_HUD_H
 
 #include <SFML/Graphics.hpp>
+#include "Player.h"
 
 namespace BRO{
 
@@ -16,11 +17,13 @@ namespace BRO{
         sf::Sprite sprite;
         sf::FloatRect maskF;
         sf::IntRect mask;
-
+        sf::ConvexShape iconPoly;
         PlayerIcon(std::string texturePath, int y, sf::RenderWindow &window, int &resMultiplier);
 
         void setVisibility(bool trueFalse);
         void setActive(bool trueFalse);
+
+        BRO::Player* linkedPlayer;
     };
 
     class Hud {

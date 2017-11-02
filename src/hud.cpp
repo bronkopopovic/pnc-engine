@@ -14,6 +14,13 @@ BRO::PlayerIcon::PlayerIcon(std::string texturePath, int y, sf::RenderWindow &wi
     sprite.setTextureRect(mask);
     sprite.setScale(resMultiplier, resMultiplier);
     sprite.setPosition(window.mapPixelToCoords(sf::Vector2i(293 * resMultiplier, y * resMultiplier)));
+
+    iconPoly.setPointCount(4);
+    iconPoly.setPoint(0, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y));
+    iconPoly.setPoint(1, sf::Vector2f(sprite.getPosition().x + (24 * resMultiplier), sprite.getPosition().y));
+    iconPoly.setPoint(2, sf::Vector2f(sprite.getPosition().x + (24 * resMultiplier), sprite.getPosition().y + (24 * resMultiplier)));
+    iconPoly.setPoint(3, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + (24 * resMultiplier)));
+    iconPoly.setFillColor(sf::Color(0,255,255,1));
 }
 
 void BRO::PlayerIcon::setVisibility(bool trueFalse) {
