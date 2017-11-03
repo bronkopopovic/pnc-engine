@@ -22,7 +22,7 @@ int main() {
     // 7 = 2240x1400
     // 8 = 2560x1600
     // 9 = 2880x1800
-    game.setResMultiplier(6);
+    game.setResMultiplier(4);
 
     //-------------------------------
     // Window
@@ -100,15 +100,17 @@ int main() {
 
     game.currentCursor = &cursor;
 
+    game.currentHud = &hud;
+
     for (int i = 0; i < hud.playerIcons.size(); i++){
         if (hud.playerIcons[i]->isActive){
-            game.currentRoom->currentPlayer = hud.playerIcons[i]->linkedPlayer;
+            game.currentPlayer = hud.playerIcons[i]->linkedPlayer;
         } else {
             game.currentRoom->idlePlayers.push_back(hud.playerIcons[i]->linkedPlayer);
         }
     }
 
-    game.currentRoom->addDynamicObject(game.currentRoom->currentPlayer->sprite);
+    game.currentRoom->addDynamicObject(game.currentPlayer->sprite);
     for (int i = 0; i < game.currentRoom->idlePlayers.size(); i++){
         game.currentRoom->addDynamicObject(game.currentRoom->idlePlayers[i]->sprite);
     }
@@ -126,7 +128,7 @@ int main() {
         //-------------------------------
         // set cursor-line points
         //-------------------------------
-        cursorLine[0].position = sf::Vector2f(game.currentRoom->currentPlayer->sprite.getPosition().x, 0);
+        cursorLine[0].position = sf::Vector2f(game.currentPlayer->sprite.getPosition().x, 0);
         cursorLine[1].position = cursor.sprite.getPosition();
 
         //-------------------------------
@@ -137,7 +139,7 @@ int main() {
         //-------------------------------
         // handle animations
         //-------------------------------
-        game.currentRoom->currentPlayer->animate(game.resMultiplier, game.resMultiplierF);
+        game.currentPlayer->animate(game.resMultiplier, game.resMultiplierF);
         for (int i = 0; i < game.currentRoom->idlePlayers.size(); i++){
             game.currentRoom->idlePlayers[i]->animate(game.resMultiplier, game.resMultiplierF);
         }
@@ -158,16 +160,16 @@ int main() {
         //-------------------------------
         if(clickedInWindow){
             cout << "click" << endl;
-            if (pathfinder.isInsidePolygon(navMesh, *game.currentRoom->currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
-                game.currentRoom->currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
+            if (pathfinder.isInsidePolygon(navMesh, *game.currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
+                game.currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
             }
-            game.playerSwitcher(game, hud);
+            game.playerSwitcher();
         }
 
         //-------------------------------
         // handle room view
         //-------------------------------
-        game.currentRoom->scrollHorizontal(game.currentRoom->currentPlayer->sprite.getPosition().x, game.resMultiplier);
+        game.currentRoom->scrollHorizontal(game.currentPlayer->sprite.getPosition().x, game.resMultiplier);
         game.currentRoom->view.reset(game.currentRoom->mask);
 
         //-------------------------------

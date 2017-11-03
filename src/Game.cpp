@@ -5,23 +5,24 @@ void BRO::Game::setResMultiplier(int multiplier) {
     resMultiplierF = resMultiplier;
 }
 
-void BRO::Game::playerSwitcher(BRO::Game &game, BRO::Hud &hud) {
+void BRO::Game::playerSwitcher() {
     hitCounter = 0;
-    game.currentRoom->idlePlayers.clear();
-    for (int i = 0; i < hud.playerIcons.size(); i++){
-        if (hud.playerIcons[i]->iconPoly.getGlobalBounds().contains(currentCursor->sprite.getPosition())){
+    currentRoom->idlePlayers.clear();
+    for (int i = 0; i < currentHud->playerIcons.size(); i++){
+        if (currentHud->playerIcons[i]->iconPoly.getGlobalBounds().contains(currentCursor->sprite.getPosition())){
             hitCounter++;
         }
     }
-    for (int i = 0; i < hud.playerIcons.size(); i++){
-        if (hud.playerIcons[i]->iconPoly.getGlobalBounds().contains(currentCursor->sprite.getPosition()) ||
-                (!(hud.playerIcons[i]->iconPoly.getGlobalBounds().contains(currentCursor->sprite.getPosition())) &&
-                 hud.playerIcons[i]->isActive && hitCounter == 0)){
-            hud.playerIcons[i]->setActive(true);
-            game.currentRoom->currentPlayer = hud.playerIcons[i]->linkedPlayer;
+    for (int i = 0; i < currentHud->playerIcons.size(); i++){
+        if (currentHud->playerIcons[i]->iconPoly.getGlobalBounds().contains(currentCursor->sprite.getPosition()) ||
+                (!(currentHud->playerIcons[i]->iconPoly.getGlobalBounds().contains(currentCursor->sprite.getPosition())) &&
+                 currentHud->playerIcons[i]->isActive && hitCounter == 0))
+        {
+            currentHud->playerIcons[i]->setActive(true);
+            currentPlayer = currentHud->playerIcons[i]->linkedPlayer;
         } else {
-            game.currentRoom->idlePlayers.push_back(hud.playerIcons[i]->linkedPlayer);
-            hud.playerIcons[i]->setActive(false);
+            currentRoom->idlePlayers.push_back(currentHud->playerIcons[i]->linkedPlayer);
+            currentHud->playerIcons[i]->setActive(false);
         }
     }
 }

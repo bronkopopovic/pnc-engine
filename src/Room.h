@@ -35,9 +35,6 @@ namespace BRO{
         sf::Sprite foreground;
         std::vector<sf::Sprite*> dynamicObjects;
 
-        // current player pointer
-        BRO::Player* currentPlayer;
-
         // idle player pointers
         std::vector<BRO::Player*> idlePlayers;
 

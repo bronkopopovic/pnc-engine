@@ -22,10 +22,12 @@ namespace BRO{
         // pointers
         BRO::Room* currentRoom;
         BRO::Cursor* currentCursor;
+        BRO::Player* currentPlayer;
+        BRO::Hud* currentHud;
 
         // player switching
         int hitCounter;
-        void playerSwitcher(BRO::Game &game, BRO::Hud &hud);
+        void playerSwitcher();
 
     };
 
