@@ -28,6 +28,7 @@ namespace BRO{
 
         // player switching
         int hitCounter;
+        sf::Vector2f mappedCursor;
         void playerSwitcher();
 
     };
