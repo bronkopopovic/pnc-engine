@@ -24,6 +24,7 @@ namespace BRO{
         BRO::Cursor* currentCursor;
 
         // player switching
+        int hitCounter;
         void playerSwitcher(BRO::Game &game, BRO::Hud &hud);
 
     };
