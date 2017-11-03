@@ -11,15 +11,14 @@ void BRO::Game::playerSwitcher() {
     mappedCursor.x = currentCursor->sprite.getPosition().x - currentRoom->mask.left;
     mappedCursor.y = currentCursor->sprite.getPosition().y - currentRoom->mask.top;
     for (int i = 0; i < currentHud->playerIcons.size(); i++){
-        if ( currentHud->playerIcons[i]->sprite.getGlobalBounds().contains(mappedCursor) ){
+        if (currentHud->playerIcons[i]->sprite.getGlobalBounds().contains(mappedCursor)){
             hitCounter++;
         }
     }
     for (int i = 0; i < currentHud->playerIcons.size(); i++){
-        if ( currentHud->playerIcons[i]->sprite.getGlobalBounds().contains(mappedCursor) ||
+        if (currentHud->playerIcons[i]->sprite.getGlobalBounds().contains(mappedCursor) ||
                 (!(currentHud->playerIcons[i]->sprite.getGlobalBounds().contains(mappedCursor)) &&
-                 currentHud->playerIcons[i]->isActive && hitCounter == 0) )
-        {
+                 currentHud->playerIcons[i]->isActive && hitCounter == 0)){
             currentHud->playerIcons[i]->setActive(true);
             currentPlayer = currentHud->playerIcons[i]->linkedPlayer;
         } else {

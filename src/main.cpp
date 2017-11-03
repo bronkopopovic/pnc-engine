@@ -160,7 +160,6 @@ int main() {
         // Click Events
         //-------------------------------
         if(clickedInWindow){
-            cout << "click" << endl;
             game.playerSwitcher();
             if (pathfinder.isInsidePolygon(navMesh, *game.currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
                 game.currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));

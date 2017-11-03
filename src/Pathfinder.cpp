@@ -54,7 +54,6 @@ int BRO::Pathfinder::isInsidePolygon(BRO::NavMesh &navMesh, BRO::Player &player,
     lineIntersects = 0;
     for (int i = 0; i <= navMesh.shapeList.size(); i++){
         if (navMesh.shapeList[i].getGlobalBounds().contains(checkedPoint)){
-            std::cout << "bounding" << std::endl;
             for (int n = 0; n < navMesh.shapeList[i].getPointCount(); n++){
                 polyEdge.push_back(navMesh.shapeList[i].getPoint(n));
                 if (n+2 > navMesh.shapeList[i].getPointCount()){
@@ -68,7 +67,6 @@ int BRO::Pathfinder::isInsidePolygon(BRO::NavMesh &navMesh, BRO::Player &player,
                 polyEdge.clear();
             }
             if (lineIntersects == 1){
-                std::cout << "You clicked a valid Polygon" << std::endl;
                 return i;
             }
         }
