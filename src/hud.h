@@ -15,9 +15,7 @@ namespace BRO{
         bool isVisible, isActive;
         sf::Texture texture;
         sf::Sprite sprite;
-        sf::FloatRect maskF;
         sf::IntRect mask;
-        sf::ConvexShape iconPoly;
         PlayerIcon(std::string texturePath, int y, sf::RenderWindow &window, int &resMultiplier);
 
         void setVisibility(bool trueFalse);

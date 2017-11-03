@@ -3,6 +3,9 @@
 
 using namespace std;
 
+//---------------
+// TEST SCENE
+//---------------
 int main() {
 
     //-------------------------------
@@ -13,16 +16,8 @@ int main() {
     static sf::Event event;
 
     // Set default game resolution
-    // 1 = 320x200
-    // 2 = 640x400
-    // 3 = 960x600
-    // 4 = 1280x800
-    // 5 = 1600x1000
-    // 6 = 1920x1200
-    // 7 = 2240x1400
-    // 8 = 2560x1600
-    // 9 = 2880x1800
-    game.setResMultiplier(4);
+    // 1 = 320x200, 2 = 640x400, 3 = 960x600, 4 = 1280x800, 5 = 1600x1000, 6 = 1920x1200, 7 = 2240x1400, 8 = 2560x1600, 9 = 2880x1800
+    game.setResMultiplier(6);
 
     //-------------------------------
     // Window
@@ -134,7 +129,13 @@ int main() {
         //-------------------------------
         // music loop
         //-------------------------------
-        //track1.loop();
+        track1.loop();
+
+        //-------------------------------
+        // handle room view
+        //-------------------------------
+        game.currentRoom->scrollHorizontal(game.currentPlayer->sprite.getPosition().x, game.resMultiplier);
+        game.currentRoom->view.reset(game.currentRoom->mask);
 
         //-------------------------------
         // handle animations
@@ -160,17 +161,11 @@ int main() {
         //-------------------------------
         if(clickedInWindow){
             cout << "click" << endl;
+            game.playerSwitcher();
             if (pathfinder.isInsidePolygon(navMesh, *game.currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
                 game.currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
             }
-            game.playerSwitcher();
         }
-
-        //-------------------------------
-        // handle room view
-        //-------------------------------
-        game.currentRoom->scrollHorizontal(game.currentPlayer->sprite.getPosition().x, game.resMultiplier);
-        game.currentRoom->view.reset(game.currentRoom->mask);
 
         //-------------------------------
         // draw all the stuff

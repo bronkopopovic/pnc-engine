@@ -36,10 +36,10 @@ BRO::Room::Room(const std::string &baseLayerTexturePath, const std::string &fore
 void BRO::Room::scrollHorizontal(float playerPositionX, int &resMultiplier){
     if (isScrollable){
         if (playerPositionX > mask.width + mask.left - 100 * resMultiplier && (baseLayerTexture.getSize().x - 1) * resMultiplier > mask.width + mask.left){
-            mask.left += 1.5f * resMultiplier;
+            mask.left += 2.5f * resMultiplier;
             foreground.move(sf::Vector2f(- resMultiplier, 0));
         } else if (playerPositionX < mask.left + 100 * resMultiplier && mask.left > 0){
-            mask.left -= 1.5f * resMultiplier;
+            mask.left -= 2.5f * resMultiplier;
             foreground.move(sf::Vector2f(resMultiplier, 0));
         }
     }
