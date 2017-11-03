@@ -7,7 +7,7 @@ void BRO::Game::setResMultiplier(int multiplier) {
 
 void BRO::Game::playerSwitcher() {
     hitCounter = 0;
-    currentRoom->idlePlayers.clear();
+    idlePlayers.clear();
     for (int i = 0; i < currentHud->playerIcons.size(); i++){
         if (currentHud->playerIcons[i]->iconPoly.getGlobalBounds().contains(currentCursor->sprite.getPosition())){
             hitCounter++;
@@ -21,7 +21,7 @@ void BRO::Game::playerSwitcher() {
             currentHud->playerIcons[i]->setActive(true);
             currentPlayer = currentHud->playerIcons[i]->linkedPlayer;
         } else {
-            currentRoom->idlePlayers.push_back(currentHud->playerIcons[i]->linkedPlayer);
+            idlePlayers.push_back(currentHud->playerIcons[i]->linkedPlayer);
             currentHud->playerIcons[i]->setActive(false);
         }
     }

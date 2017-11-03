@@ -106,13 +106,13 @@ int main() {
         if (hud.playerIcons[i]->isActive){
             game.currentPlayer = hud.playerIcons[i]->linkedPlayer;
         } else {
-            game.currentRoom->idlePlayers.push_back(hud.playerIcons[i]->linkedPlayer);
+            game.idlePlayers.push_back(hud.playerIcons[i]->linkedPlayer);
         }
     }
 
     game.currentRoom->addDynamicObject(game.currentPlayer->sprite);
-    for (int i = 0; i < game.currentRoom->idlePlayers.size(); i++){
-        game.currentRoom->addDynamicObject(game.currentRoom->idlePlayers[i]->sprite);
+    for (int i = 0; i < game.idlePlayers.size(); i++){
+        game.currentRoom->addDynamicObject(game.idlePlayers[i]->sprite);
     }
 
     //-------------------------------
@@ -140,8 +140,8 @@ int main() {
         // handle animations
         //-------------------------------
         game.currentPlayer->animate(game.resMultiplier, game.resMultiplierF);
-        for (int i = 0; i < game.currentRoom->idlePlayers.size(); i++){
-            game.currentRoom->idlePlayers[i]->animate(game.resMultiplier, game.resMultiplierF);
+        for (int i = 0; i < game.idlePlayers.size(); i++){
+            game.idlePlayers[i]->animate(game.resMultiplier, game.resMultiplierF);
         }
 
         //-------------------------------

@@ -23,6 +23,7 @@ namespace BRO{
         BRO::Room* currentRoom;
         BRO::Cursor* currentCursor;
         BRO::Player* currentPlayer;
+        std::vector<BRO::Player*> idlePlayers;
         BRO::Hud* currentHud;
 
         // player switching

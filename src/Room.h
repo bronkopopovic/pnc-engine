@@ -35,9 +35,6 @@ namespace BRO{
         sf::Sprite foreground;
         std::vector<sf::Sprite*> dynamicObjects;
 
-        // idle player pointers
-        std::vector<BRO::Player*> idlePlayers;
-
         // Nav Mesh stuff
         BRO::NavMesh navMesh;
         static bool compareY(const sf::Sprite *sprite1, const sf::Sprite *sprite2);
