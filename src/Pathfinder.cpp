@@ -1,8 +1,7 @@
 #include "Pathfinder.h"
 
 void BRO::Node::addAdjacency(Node &node) {
-
-    adjacencyList.push_back(node);
+    adjacencyList.push_back(&node);
 }
 
 void BRO::Node::setCoords(float xCoord, float yCoord) {
@@ -12,31 +11,36 @@ void BRO::Node::setCoords(float xCoord, float yCoord) {
 
 void BRO::Polygon::assign(sf::ConvexShape &_shape, BRO::Node &_node) {
     shape = _shape;
-    node = _node;
+    node = &_node;
 }
 
 void BRO::NavMesh::addPoly(BRO::Polygon &poly) {
     polyList.push_back(poly);
 }
 
-void BRO::NavMesh::addShape(sf::ConvexShape &shape){
+void BRO::NavMesh::addShape(sf::ConvexShape &shape) {
     shapeList.push_back(shape);
 };
 
-int BRO::Pathfinder::orientation(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r)
-{
-    // See http://www.geeksforgeeks.org/orientation-3-ordered-points/
-    // for details of below formula.
+//--------------------------------------------
+// Check how 3 given points are oriented
+// (clockwise, counter-clockwise)
+//--------------------------------------------
+int BRO::Pathfinder::orientation(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r) {
     float val = (q.y - p.y) * (r.x - q.x) -
               (q.x - p.x) * (r.y - q.y);
 
-    if (val == 0) return 0;  // colinear
-
-    return (val > 0)? 1: 2; // clock or counterclock wise
+    // 0 = colinear
+    if (val == 0) return 0;
+    // 1 = clockwise
+    // 2 = counter-clockwise
+    return (val > 0) ? 1 : 2;
 }
 
-bool BRO::Pathfinder::doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f p2, sf::Vector2f q2)
-{
+//------------------------------------------------------------
+// check if line segments intersect with orientation function
+//------------------------------------------------------------
+bool BRO::Pathfinder::doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f p2, sf::Vector2f q2) {
     // Find the four orientations
     int o1 = orientation(p1, q1, p2);
     int o2 = orientation(p1, q1, q2);
@@ -50,6 +54,11 @@ bool BRO::Pathfinder::doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f
     return false;
 }
 
+//-------------------------------------------------------
+// check if point is inside polygon.
+// Iterate through all poly edges and
+// check if an imaginary line intersects them
+//-------------------------------------------------------
 int BRO::Pathfinder::isInsidePolygon(BRO::NavMesh &navMesh, BRO::Player &player, sf::RenderWindow &window, sf::Vector2f checkedPoint) {
     lineIntersects = 0;
     for (int i = 0; i <= navMesh.shapeList.size(); i++){
@@ -66,11 +75,13 @@ int BRO::Pathfinder::isInsidePolygon(BRO::NavMesh &navMesh, BRO::Player &player,
                 }
                 polyEdge.clear();
             }
+            // one intersection means point is inside polygon
             if (lineIntersects == 1){
                 return i;
             }
         }
     }
+    // intersection count other than 1 means point is outside polygon (convex polys only)
     if (lineIntersects != 1){
         return -1;
     }
@@ -80,11 +91,24 @@ float BRO::Pathfinder::pointToPointDistance(BRO::Node &node1, BRO::Node &node2) 
     return std::sqrt(((node1.x - node2.x)*(node1.x - node2.x)) + ((node1.y - node2.y)*(node1.y - node2.y)));
 }
 
-float BRO::Pathfinder::calculateF(BRO::Node &startNode, BRO::Node &adjacentNode, BRO::Node &endNode){
+float BRO::Pathfinder::calculateF(BRO::Node &startNode, BRO::Node &adjacentNode, BRO::Node &endNode) {
     return pointToPointDistance(adjacentNode, endNode) + pointToPointDistance(startNode, adjacentNode);
 }
 
-void BRO::Pathfinder::getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window){
+bool BRO::Pathfinder::compareF(const BRO::Node* node1, const BRO::Node* node2) {
+    return node1->F < node2->F;
+}
+
+//--------------------------------------------
+// expand a node by all its adjacent nodes
+//--------------------------------------------
+void BRO::Pathfinder::expandNode() {
+}
+
+//--------------------------------------------
+// polygon preselection for pathfinding
+//--------------------------------------------
+void BRO::Pathfinder::getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window) {
 
     // Calculate start Node with playerPosition
     startNodeI = isInsidePolygon(navMesh, player, window, player.sprite.getPosition());
@@ -96,17 +120,25 @@ void BRO::Pathfinder::getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BR
     openList.push_back(startNode);
 
     // Push adjacent Nodes of startNode to open List
-    for (int i = 0; i < startNode.adjacencyList.size(); i++){
-        openList.push_back(startNode.adjacencyList[i]);
-        startNode.adjacencyList[i].parent = startNodeI;
+    for (int i = 0; i < startNode->adjacencyList.size(); i++){
+        openList.push_back(startNode->adjacencyList[i]);
+        startNode->adjacencyList[i]->parent = startNodeI;
     }
 
     // remove startNode from open List and push to closed List
     openList.erase(openList.begin());
     closedList.push_back(startNode);
 
+    // Calculate all current F values
     for (int i = 0; i < openList.size(); i++){
-        openList[i].F = calculateF(startNode, openList[i], endNode);
+        openList[i]->F = calculateF(*startNode, *openList[i], *endNode);
     }
-    //closedList.push_back(std::min_element(openList))
+
+    // sort openList by F value
+    //std::sort(openList.begin(), openList.end(), BRO::Pathfinder::compareF);
+
+    // add first element of open List (lowest F)
+    // to closed list and remove it from openList
+    //openList.erase(openList.begin());
+    //closedList.push_back(openList[0]);
 }

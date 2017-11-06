@@ -15,7 +15,7 @@ namespace BRO{
     //-----------------
     class Node {
     public:
-        std::vector<BRO::Node> adjacencyList;
+        std::vector<BRO::Node*> adjacencyList;
 
         // parent node represented as integer which will
         // index the corresponding node in the navMesh
@@ -36,7 +36,7 @@ namespace BRO{
     class Polygon {
     public:
         sf::ConvexShape shape;
-        BRO::Node node;
+        BRO::Node* node;
 
         void assign(sf::ConvexShape &_shape, BRO::Node &_node);
     };
@@ -69,15 +69,17 @@ namespace BRO{
         // A-star algorithm for polygon preselection
         static float pointToPointDistance(BRO::Node &node1, BRO::Node &node2);
         float calculateF(BRO::Node &node, BRO::Node &adjacentNode, BRO::Node &endNode);
+        bool compareF(const BRO::Node* node1, const BRO::Node* node2);
+        void expandNode();
 
-        std::vector<BRO::Node> openList;
-        std::vector<BRO::Node> closedList;
+        std::vector<BRO::Node*> openList;
+        std::vector<BRO::Node*> closedList;
 
 
         int startNodeI;
-        BRO::Node startNode;
+        BRO::Node* startNode;
         int endNodeI;
-        BRO::Node endNode;
+        BRO::Node* endNode;
 
         void getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window);
     };
