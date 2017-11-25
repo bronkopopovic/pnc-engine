@@ -30,6 +30,7 @@ set(SOURCE_FILES
 
         # Room confs
         rooms/studio.conf
+        rooms/studio.navmesh
         )
 
 # Players

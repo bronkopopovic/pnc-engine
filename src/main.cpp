@@ -60,6 +60,7 @@ int main() {
     // Room Conf
     //-------------------------------
     #include "../rooms/studio.conf"
+    #include "../rooms/studio.navmesh"
 
     //-------------------------------
     // Pathfinder
@@ -171,7 +172,7 @@ int main() {
         //-------------------------------
         if(clickedInWindow){
             game.playerSwitcher();
-            if (pathfinder.isInsidePolygon(navMesh, *game.currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
+            if (pathfinder.isInsidePolygon(studio_navMesh, *game.currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
                 game.currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
             }
         }
