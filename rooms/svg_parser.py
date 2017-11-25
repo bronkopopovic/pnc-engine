@@ -1,8 +1,3 @@
-import os
-import sys
-import glob
-import itertools
-
 class Polygon:
 	def __init__(self, name):
 		self.name = name
@@ -21,10 +16,6 @@ def routine():
 	_in.close()
 
 	_out = open(outputFile, "w+")
-
-	# first comment indicating nav-mesh
-	_out.write("//---------------------\n// NAV-MESH\n//---------------------\n")
-	_out.write("BRO::NavMesh "+roomName+"_navMesh;\n")
 
 	polyNames = []
 
@@ -77,9 +68,10 @@ def routine():
 		for poly2 in polyNames:
 			if checkAdjacency(polys[poly1], polys[poly2]) == 1:
 				polys[poly1].adjacencyList.append(poly2)
-		print polys[poly1].adjacencyList
 
-
+	# first comment indicating nav-mesh
+	_out.write("//---------------------\n// NAV-MESH\n//---------------------\n")
+	_out.write("BRO::NavMesh "+roomName+"_navMesh;\n")
 
 	pointCounter = 0
 
@@ -107,10 +99,13 @@ def routine():
 		_out.write(roomName+"_navMesh.addShape("+roomName+"_"+poly+");\n")
 		_out.write(roomName+"_navMesh.addPoly("+roomName+"_"+poly.replace("poly", "polygon")+");\n")
 
+	# Adjacency stuff
 	_out.write("\n\n//------------------------\n// ADJACENCY SETUP\n//------------------------\n")
 
 	for poly in polyNames:
 		for adj in polys[poly].adjacencyList:
 			_out.write(roomName+"_"+poly.replace("poly", "node")+".addAdjacency("+roomName+"_"+adj.replace("poly", "node")+");\n")
 
-routine()
+	return roomName
+
+print "\nNavMesh saved to'/rooms/"+routine()+".navmesh'"
