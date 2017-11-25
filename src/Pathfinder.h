@@ -76,9 +76,9 @@ namespace BRO{
         std::vector<BRO::Node*> closedList;
 
 
-        int startNodeI;
+        int startNodeIndex;
         BRO::Node* startNode;
-        int endNodeI;
+        int endNodeIndex;
         BRO::Node* endNode;
 
         void getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window);

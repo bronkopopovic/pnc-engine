@@ -34,7 +34,7 @@ BRO::PlayerAnimation BRO::Player::getAnimationFromSheet(std::vector<BRO::PlayerA
     }
 }
 
-void BRO::Player:: iterateSprite(BRO::PlayerAnimation &playerAnimation){
+void BRO::Player::iterateSprite(BRO::PlayerAnimation &playerAnimation){
     mask.top = playerAnimation.top;
     if (clock.getElapsedTime().asSeconds() > playerAnimation.speed){
         if (mask.left >= playerAnimation.maxLeft) {
@@ -51,21 +51,27 @@ void BRO::Player:: iterateSprite(BRO::PlayerAnimation &playerAnimation){
 //---------------------------
 // set Target
 //---------------------------
-void BRO::Player:: setTarget(sf::Vector2f coordinates){
+void BRO::Player::setTarget(sf::Vector2f coordinates){
     moveTarget = coordinates;
+    direction = sf::Vector2f(moveTarget.x, moveTarget.y) - sprite.getPosition();
 }
 
 //----------------------------------------------
 // walk-animations + sprite movement
 //----------------------------------------------
-void BRO::Player:: walk(int &resMultiplier, float &resMultiplierF){
+void BRO::Player::walk(int &resMultiplier, float &resMultiplierF){
+
     if (moveClock.getElapsedTime().asMilliseconds() > 10){
-        sf::Vector2f direction = sf::Vector2f(moveTarget.x, moveTarget.y) - sprite.getPosition();
+
+        // path length, direction has been set in BRO::Player::setTarget()
         float magnitude = sqrt((direction.x * direction.x) + (direction.y * direction.y));
-        sf::Vector2f unitVector((direction.x * 1.6f) / magnitude, direction.y / (magnitude * 1.6f));
+
+        // quantized path
+        sf::Vector2f unitVector(direction.x / magnitude, direction.y / magnitude);
 
         // player-movement
         sprite.move(unitVector * (sprite.getPosition().y / (resMultiplier * 130)) * resMultiplierF);
+        //sprite.move(direction);
 
         // scale player based on y-axis
         sprite.setScale((0.01f * (sprite.getPosition().y / resMultiplier) * 0.999f) * resMultiplier,
@@ -113,7 +119,7 @@ void BRO::Player::idle(){
 //------------------------------------
 // handling all animations
 //------------------------------------
-void BRO::Player:: animate(int &resMultiplier, float &resMultiplierF){
+void BRO::Player::animate(int &resMultiplier, float &resMultiplierF){
     targetReached =
             round(moveTarget.x) + resMultiplier  > round(sprite.getPosition().x) - resMultiplier &&
             round(moveTarget.x) - resMultiplier < round(sprite.getPosition().x) + resMultiplier &&

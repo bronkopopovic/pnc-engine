@@ -61,9 +61,9 @@ bool BRO::Pathfinder::doIntersect(sf::Vector2f p1, sf::Vector2f q1, sf::Vector2f
 //-------------------------------------------------------
 int BRO::Pathfinder::isInsidePolygon(BRO::NavMesh &navMesh, BRO::Player &player, sf::RenderWindow &window, sf::Vector2f checkedPoint) {
     lineIntersects = 0;
-    for (int i = 0; i <= navMesh.shapeList.size(); i++){
+    for (int i = 0; i < navMesh.shapeList.size(); i++){
         if (navMesh.shapeList[i].getGlobalBounds().contains(checkedPoint)){
-            for (int n = 0; n < navMesh.shapeList[i].getPointCount(); n++){
+            for (size_t n = 0; n < navMesh.shapeList[i].getPointCount(); n++){
                 polyEdge.push_back(navMesh.shapeList[i].getPoint(n));
                 if (n+2 > navMesh.shapeList[i].getPointCount()){
                     polyEdge.push_back(navMesh.shapeList[i].getPoint(0));
@@ -75,7 +75,7 @@ int BRO::Pathfinder::isInsidePolygon(BRO::NavMesh &navMesh, BRO::Player &player,
                 }
                 polyEdge.clear();
             }
-            // one intersection means point is inside polygon
+            // one intersection means point is inside polygon (convex polys only)
             if (lineIntersects == 1){
                 return i;
             }
@@ -111,10 +111,10 @@ void BRO::Pathfinder::expandNode() {
 void BRO::Pathfinder::getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BRO::Cursor &cursor, sf::RenderWindow &window) {
 
     // Calculate start Node with playerPosition
-    startNodeI = isInsidePolygon(navMesh, player, window, player.sprite.getPosition());
-    startNode = navMesh.polyList[startNodeI].node;
-    endNodeI = isInsidePolygon(navMesh, player, window, cursor.sprite.getPosition());
-    endNode = navMesh.polyList[endNodeI].node;
+    startNodeIndex = isInsidePolygon(navMesh, player, window, player.sprite.getPosition()); // function returns index of clicked polygon
+    startNode = navMesh.polyList[startNodeIndex].node;
+    endNodeIndex = isInsidePolygon(navMesh, player, window, cursor.sprite.getPosition());
+    endNode = navMesh.polyList[endNodeIndex].node;
 
     // Push startNode to open List
     openList.push_back(startNode);
@@ -122,12 +122,12 @@ void BRO::Pathfinder::getNodePath(BRO::NavMesh &navMesh, BRO::Player &player, BR
     // Push adjacent Nodes of startNode to open List
     for (int i = 0; i < startNode->adjacencyList.size(); i++){
         openList.push_back(startNode->adjacencyList[i]);
-        startNode->adjacencyList[i]->parent = startNodeI;
+        startNode->adjacencyList[i]->parent = startNodeIndex;
     }
 
     // remove startNode from open List and push to closed List
+    closedList.push_back(openList[0]);
     openList.erase(openList.begin());
-    closedList.push_back(startNode);
 
     // Calculate all current F values
     for (int i = 0; i < openList.size(); i++){

@@ -26,6 +26,7 @@ set(SOURCE_FILES
         # Character confs
         characters/ch2.conf
         characters/ch4.conf
+        characters/chef.conf
 
         # Room confs
         rooms/studio.conf
@@ -36,6 +37,7 @@ configure_file(images/sprite_full.png sprite_full.png COPYONLY)
 configure_file(images/ch2_ico.png ch2_ico.png COPYONLY)
 configure_file(images/ch4_full.png ch4_full.png COPYONLY)
 configure_file(images/ch4_ico.png ch4_ico.png COPYONLY)
+configure_file(images/chef_full.png chef_full.png COPYONLY)
 
 
 # Stuff

@@ -39,6 +39,7 @@ int main() {
     //-------------------------------
     #include "../characters/ch2.conf"
     #include "../characters/ch4.conf"
+    #include "../characters/chef.conf"
 
     //-------------------------------
     // Player Positions
@@ -50,6 +51,10 @@ int main() {
     ch4.sprite.setPosition(190 * game.resMultiplier, 100 * game.resMultiplier);
     ch4.sprite.setScale(game.resMultiplier, game.resMultiplier);
     ch4.setTarget(sf::Vector2f(190 * game.resMultiplier, 100 * game.resMultiplier));
+
+    chef.sprite.setPosition(390 * game.resMultiplier, 100 * game.resMultiplier);
+    chef.sprite.setScale(game.resMultiplier, game.resMultiplier);
+    chef.setTarget(sf::Vector2f(120 * game.resMultiplier, 100 * game.resMultiplier));
 
     //-------------------------------
     // Room Conf
@@ -105,6 +110,8 @@ int main() {
         }
     }
 
+    game.currentRoom->addDynamicObject(chef.sprite);
+
     game.currentRoom->addDynamicObject(game.currentPlayer->sprite);
     for (int i = 0; i < game.idlePlayers.size(); i++){
         game.currentRoom->addDynamicObject(game.idlePlayers[i]->sprite);
@@ -114,6 +121,9 @@ int main() {
     // Game LOOOOOOOOP
     //-------------------------------
     while(game.window.isOpen()){
+        //-------------------------------
+        // Close button closes game
+        //-------------------------------
         while(game.window.pollEvent(event)) {
             if(event.type == sf::Event::Closed){
                 game.window.close();
@@ -129,7 +139,7 @@ int main() {
         //-------------------------------
         // music loop
         //-------------------------------
-        //track1.loop();
+        track1.loop();
 
         //-------------------------------
         // handle room view
@@ -174,13 +184,14 @@ int main() {
         // cursor line
         //game.window.draw(cursorLine, 2, sf::Lines);
 
+        // navMesh
+        /*for (int i = 0; i < navMesh.polyList.size(); i++) {
+            game.window.draw(navMesh.polyList[i].shape);
+        }*/
+
         game.currentRoom->drawDynamicObjects(*game.currentRoom, game.window);
         game.window.draw(game.currentRoom->foreground);
 
-        // navMesh
-        /*for (int i = 0; i < navMesh.polyList.size(); i++){
-            game.window.draw(navMesh.polyList[i].shape);
-        }*/
 
         game.window.setView(game.window.getDefaultView());
         hud.drawHud(game.window);
