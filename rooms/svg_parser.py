@@ -111,6 +111,8 @@ def routine():
 		for adj in polys[poly].adjacencyList:
 			_out.write(roomName+"_"+poly.replace("poly", "node")+".addAdjacency("+roomName+"_"+adj.replace("poly", "node")+");\n")
 
+	_out.close()
+
 	return roomName
 
 print "\nNavMesh saved to'/rooms/"+routine()+".navmesh'"
