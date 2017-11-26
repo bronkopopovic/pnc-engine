@@ -26,7 +26,7 @@ def routine():
 
 	# generate poly names
 	for i, line in enumerate(lines):
-		polyNames.append("poly" + str(i+1))
+		polyNames.append("poly"+str(i+1))
 
 	# dictionary of Polygon objects
 	polys = {name: Polygon(name=name) for name in polyNames}
@@ -82,18 +82,18 @@ def routine():
 
 	for poly in polyNames:
 		# Comment
-		_out.write("\n\n//-----------------\n// " + poly.replace("poly", "") + "\n//-----------------\n")
+		_out.write("\n\n//-----------------\n// "+poly.replace("poly", "")+"\n//-----------------\n")
 		# ConvexShape
-		_out.write("sf::ConvexShape "+ roomName + "_" + poly + ";\n")
+		_out.write("sf::ConvexShape "+roomName+"_"+poly+";\n")
 		# Point Count
 		_out.write(roomName+"_"+poly+".setPointCount("+str(len(polys[poly].vertices))+");\n\n")
 		# Points
 		for i, vertex in enumerate(polys[poly].vertices):
 			pointCounter += 1
 			# declare vertices
-			_out.write("sf::Vector2f "+ roomName + "_point"+str(pointCounter)+" = sf::Vector2f("+polys[poly].vertices[i][0]+" * game.resMultiplier, "+polys[poly].vertices[i][1]+" * game.resMultiplier);\n")
+			_out.write("sf::Vector2f "+roomName+"_point"+str(pointCounter)+" = sf::Vector2f("+polys[poly].vertices[i][0]+" * game.resMultiplier, "+polys[poly].vertices[i][1]+" * game.resMultiplier);\n")
 			# assign vertices
-			_out.write(roomName + "_" + poly + ".setPoint("+str(i)+", "+roomName+"_point"+str(pointCounter)+");\n")
+			_out.write(roomName+"_"+poly+".setPoint("+str(i)+", "+roomName+"_point"+str(pointCounter)+");\n")
 
 		_out.write("\nBRO::Node "+roomName+"_"+poly.replace("poly", "node")+";\n")
 		_out.write(roomName+"_"+poly.replace("poly", "node")+".setCoords("+str(polys[poly].center[0])+", "+str(polys[poly].center[1])+");\n\n")

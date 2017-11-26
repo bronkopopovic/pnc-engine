@@ -1,0 +1,6 @@
+#include "../assets/characters/ch2.conf"
+#include "../assets/characters/ch4.conf"
+#include "../assets/characters/chef.conf"
+
+#include "../assets/rooms/studio.conf"
+#include "../assets/rooms/studio.navmesh"

@@ -34,12 +34,7 @@ int main() {
     BRO::Cursor cursor;
     cursor.setScale(game.resMultiplier);
 
-    //-------------------------------
-    // Player Configs
-    //-------------------------------
-    #include "../characters/ch2.conf"
-    #include "../characters/ch4.conf"
-    #include "../characters/chef.conf"
+    #include "../assets/assets.lib"
 
     //-------------------------------
     // Player Positions
@@ -55,12 +50,6 @@ int main() {
     chef.sprite.setPosition(390 * game.resMultiplier, 100 * game.resMultiplier);
     chef.sprite.setScale(game.resMultiplier, game.resMultiplier);
     chef.setTarget(sf::Vector2f(120 * game.resMultiplier, 100 * game.resMultiplier));
-
-    //-------------------------------
-    // Room Conf
-    //-------------------------------
-    #include "../rooms/studio.conf"
-    #include "../rooms/studio.navmesh"
 
     //-------------------------------
     // Pathfinder

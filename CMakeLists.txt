@@ -23,42 +23,44 @@ set(SOURCE_FILES
         src/hud.cpp
         src/hud.h
 
+        assets/assets.lib
+
         # Character confs
-        characters/ch2.conf
-        characters/ch4.conf
-        characters/chef.conf
+        assets/characters/ch2.conf
+        assets/characters/ch4.conf
+        assets/characters/chef.conf
 
         # Room confs
-        rooms/studio.conf
-        rooms/studio.navmesh
+        assets/rooms/studio.conf
+        assets/rooms/studio.navmesh
         )
 
 # Players
-configure_file(images/sprite_full.png sprite_full.png COPYONLY)
-configure_file(images/ch2_ico.png ch2_ico.png COPYONLY)
-configure_file(images/ch4_full.png ch4_full.png COPYONLY)
-configure_file(images/ch4_ico.png ch4_ico.png COPYONLY)
-configure_file(images/chef_full.png chef_full.png COPYONLY)
+configure_file(assets/images/sprite_full.png sprite_full.png COPYONLY)
+configure_file(assets/images/ch2_ico.png ch2_ico.png COPYONLY)
+configure_file(assets/images/ch4_full.png ch4_full.png COPYONLY)
+configure_file(assets/images/ch4_ico.png ch4_ico.png COPYONLY)
+configure_file(assets/images/chef_full.png chef_full.png COPYONLY)
 
 
 # Stuff
-configure_file(images/cursor.png cursor.png COPYONLY)
-configure_file(images/shop.png shop.png COPYONLY)
-configure_file(images/bedroom.png bedroom.png COPYONLY)
-configure_file(images/arcade.png arcade.png COPYONLY)
+configure_file(assets/images/cursor.png cursor.png COPYONLY)
+configure_file(assets/images/shop.png shop.png COPYONLY)
+configure_file(assets/images/bedroom.png bedroom.png COPYONLY)
+configure_file(assets/images/arcade.png arcade.png COPYONLY)
 
 # Studio Room
-configure_file(images/studio.png studio.png COPYONLY)
-configure_file(images/studio_pillar1.png studio_pillar1.png COPYONLY)
-configure_file(images/studio_pillar2.png studio_pillar2.png COPYONLY)
-configure_file(images/studio_pillar3.png studio_pillar3.png COPYONLY)
-configure_file(images/studio_pillar4.png studio_pillar4.png COPYONLY)
-configure_file(images/studio_pillar5.png studio_pillar5.png COPYONLY)
-configure_file(images/studio_foreground1.png studio_foreground1.png COPYONLY)
+configure_file(assets/images/studio.png studio.png COPYONLY)
+configure_file(assets/images/studio_pillar1.png studio_pillar1.png COPYONLY)
+configure_file(assets/images/studio_pillar2.png studio_pillar2.png COPYONLY)
+configure_file(assets/images/studio_pillar3.png studio_pillar3.png COPYONLY)
+configure_file(assets/images/studio_pillar4.png studio_pillar4.png COPYONLY)
+configure_file(assets/images/studio_pillar5.png studio_pillar5.png COPYONLY)
+configure_file(assets/images/studio_foreground1.png studio_foreground1.png COPYONLY)
 
 # Music
-configure_file(music/track1.ogg track1.ogg COPYONLY)
-configure_file(music/track2.ogg track2.ogg COPYONLY)
+configure_file(assets/music/track1.ogg track1.ogg COPYONLY)
+configure_file(assets/music/track2.ogg track2.ogg COPYONLY)
 
 add_executable(SFML ${SOURCE_FILES})
 
