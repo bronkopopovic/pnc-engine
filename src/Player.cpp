@@ -90,19 +90,19 @@ void BRO::Player::walk(int &resMultiplier, float &resMultiplierF){
         }
 
         // walk left
-        if (direction.x < 0 && positiveDirectionX > positiveDirectionY){
+        if (direction.x < 0 && positiveDirectionX * 0.5 > positiveDirectionY){
             iterateSprite(spriteSheet[1]);
         }
             // walk right
-        else if (direction.x > 0 && positiveDirectionX > positiveDirectionY){
+        else if (direction.x > 0 && positiveDirectionX * 0.5 > positiveDirectionY){
             iterateSprite(spriteSheet[2]);
         }
             // walk front
-        else if (positiveDirectionX < positiveDirectionY && direction.y > 0){
+        else if (positiveDirectionX * 0.5 < positiveDirectionY && direction.y > 0){
             iterateSprite(spriteSheet[3]);
         }
             // walk back
-        else if (positiveDirectionX < positiveDirectionY && direction.y < 0){
+        else if (positiveDirectionX * 0.5 < positiveDirectionY && direction.y < 0){
             iterateSprite(spriteSheet[4]);
         }
         moveClock.restart();

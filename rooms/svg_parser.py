@@ -12,7 +12,12 @@ def routine():
 	outputFile = roomName+".navmesh"
 
 	_in = open(inputFile, "r")
-	lines = _in.readlines()
+	rawLines = _in.readlines()
+	lines = []
+	for rawLine in rawLines:
+		if rawLine.find("<polygon") != -1:
+			lines.append(rawLine)
+
 	_in.close()
 
 	_out = open(outputFile, "w+")
@@ -29,7 +34,7 @@ def routine():
 	# add vertices to polygons
 	for i, line in enumerate(lines):
 		splitLine = line.split('"')
-		rawPoints = splitLine[3]
+		rawPoints = splitLine[5]
 		rawVertices = rawPoints.split(" ")
 		rawVertices.pop()
 		for rawVertex in rawVertices:
