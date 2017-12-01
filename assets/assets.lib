@@ -1,6 +1,21 @@
+//-----------------------
+// Characters
+//-----------------------
 #include "../assets/characters/ch2.conf"
 #include "../assets/characters/ch4.conf"
 #include "../assets/characters/chef.conf"
 
+//-----------------------
+// Rooms
+//-----------------------
 #include "../assets/rooms/studio.conf"
 #include "../assets/rooms/studio.navmesh"
+
+//-------------------------------
+// Pathfinder
+//-------------------------------
+BRO::Pathfinder pathfinder;
+
+sf::Vertex cursorLine[2];
+cursorLine[0].color = sf::Color(255,255,255);
+cursorLine[1].color = sf::Color(255,255,255);

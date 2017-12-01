@@ -24,6 +24,8 @@ set(SOURCE_FILES
         src/hud.h
 
         assets/assets.lib
+        configs/game.conf
+        configs/test_room.conf
 
         # Character confs
         assets/characters/ch2.conf
