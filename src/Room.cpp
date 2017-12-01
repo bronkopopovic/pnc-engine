@@ -32,6 +32,21 @@ BRO::Room::Room(const std::string &baseLayerTexturePath, const std::string &fore
         isScrollable = false;
     }
 }
+BRO::Room::Room(const std::string &baseLayerTexturePath, int &resMultiplier){
+    mask.left = 0;
+    mask.top = 0;
+    mask.width = 320 * resMultiplier;
+    mask.height = 200 * resMultiplier;
+    view.reset(mask);
+    baseLayerTexture.loadFromFile(baseLayerTexturePath);
+    baseLayer.setTexture(baseLayerTexture);
+    baseLayer.scale(resMultiplier, resMultiplier);
+    if (baseLayerTexture.getSize().x != mask.width || baseLayerTexture.getSize().y != mask.height){
+        isScrollable = true;
+    } else {
+        isScrollable = false;
+    }
+}
 
 void BRO::Room::scrollHorizontal(float playerPositionX, int &resMultiplier){
     if (isScrollable){
@@ -45,8 +60,8 @@ void BRO::Room::scrollHorizontal(float playerPositionX, int &resMultiplier){
     }
 }
 
-void BRO::Room::setNavMesh(const BRO::NavMesh &_navMesh){
-    navMesh = _navMesh;
+void BRO::Room::setNavMesh(BRO::NavMesh &navMesh){
+    *linkedNavMesh = navMesh;
 }
 
 void BRO::Room::addDynamicObject(sf::Sprite &sprite) {

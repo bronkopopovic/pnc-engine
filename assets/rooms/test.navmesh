@@ -1,0 +1,149 @@
+//---------------------
+// NAV-MESH
+//---------------------
+BRO::NavMesh test_navMesh;
+
+//-----------------
+// 1
+//-----------------
+sf::ConvexShape test_poly1;
+test_poly1.setPointCount(5);
+
+sf::Vector2f test_point1 = sf::Vector2f(12 * game.resMultiplier, 128 * game.resMultiplier);
+test_poly1.setPoint(0, test_point1);
+sf::Vector2f test_point2 = sf::Vector2f(88 * game.resMultiplier, 104 * game.resMultiplier);
+test_poly1.setPoint(1, test_point2);
+sf::Vector2f test_point3 = sf::Vector2f(103 * game.resMultiplier, 104 * game.resMultiplier);
+test_poly1.setPoint(2, test_point3);
+sf::Vector2f test_point4 = sf::Vector2f(103 * game.resMultiplier, 114 * game.resMultiplier);
+test_poly1.setPoint(3, test_point4);
+sf::Vector2f test_point5 = sf::Vector2f(97 * game.resMultiplier, 128 * game.resMultiplier);
+test_poly1.setPoint(4, test_point5);
+
+BRO::Node test_node1;
+test_node1.setCoords(80, 115);
+
+BRO::Polygon test_polygon1;
+test_polygon1.assign(test_poly1, test_node1);
+
+test_navMesh.addShape(test_poly1);
+test_navMesh.addPoly(test_polygon1);
+
+
+//-----------------
+// 2
+//-----------------
+sf::ConvexShape test_poly2;
+test_poly2.setPointCount(4);
+
+sf::Vector2f test_point6 = sf::Vector2f(103 * game.resMultiplier, 114 * game.resMultiplier);
+test_poly2.setPoint(0, test_point6);
+sf::Vector2f test_point7 = sf::Vector2f(151 * game.resMultiplier, 114 * game.resMultiplier);
+test_poly2.setPoint(1, test_point7);
+sf::Vector2f test_point8 = sf::Vector2f(165 * game.resMultiplier, 128 * game.resMultiplier);
+test_poly2.setPoint(2, test_point8);
+sf::Vector2f test_point9 = sf::Vector2f(97 * game.resMultiplier, 128 * game.resMultiplier);
+test_poly2.setPoint(3, test_point9);
+
+BRO::Node test_node2;
+test_node2.setCoords(129, 121);
+
+BRO::Polygon test_polygon2;
+test_polygon2.assign(test_poly2, test_node2);
+
+test_navMesh.addShape(test_poly2);
+test_navMesh.addPoly(test_polygon2);
+
+
+//-----------------
+// 3
+//-----------------
+sf::ConvexShape test_poly3;
+test_poly3.setPointCount(6);
+
+sf::Vector2f test_point10 = sf::Vector2f(153 * game.resMultiplier, 104 * game.resMultiplier);
+test_poly3.setPoint(0, test_point10);
+sf::Vector2f test_point11 = sf::Vector2f(151 * game.resMultiplier, 114 * game.resMultiplier);
+test_poly3.setPoint(1, test_point11);
+sf::Vector2f test_point12 = sf::Vector2f(165 * game.resMultiplier, 128 * game.resMultiplier);
+test_poly3.setPoint(2, test_point12);
+sf::Vector2f test_point13 = sf::Vector2f(251 * game.resMultiplier, 127 * game.resMultiplier);
+test_poly3.setPoint(3, test_point13);
+sf::Vector2f test_point14 = sf::Vector2f(253 * game.resMultiplier, 115 * game.resMultiplier);
+test_poly3.setPoint(4, test_point14);
+sf::Vector2f test_point15 = sf::Vector2f(247 * game.resMultiplier, 104 * game.resMultiplier);
+test_poly3.setPoint(5, test_point15);
+
+BRO::Node test_node3;
+test_node3.setCoords(203, 115);
+
+BRO::Polygon test_polygon3;
+test_polygon3.assign(test_poly3, test_node3);
+
+test_navMesh.addShape(test_poly3);
+test_navMesh.addPoly(test_polygon3);
+
+
+//-----------------
+// 4
+//-----------------
+sf::ConvexShape test_poly4;
+test_poly4.setPointCount(4);
+
+sf::Vector2f test_point16 = sf::Vector2f(253 * game.resMultiplier, 115 * game.resMultiplier);
+test_poly4.setPoint(0, test_point16);
+sf::Vector2f test_point17 = sf::Vector2f(376 * game.resMultiplier, 115 * game.resMultiplier);
+test_poly4.setPoint(1, test_point17);
+sf::Vector2f test_point18 = sf::Vector2f(384 * game.resMultiplier, 127 * game.resMultiplier);
+test_poly4.setPoint(2, test_point18);
+sf::Vector2f test_point19 = sf::Vector2f(251 * game.resMultiplier, 127 * game.resMultiplier);
+test_poly4.setPoint(3, test_point19);
+
+BRO::Node test_node4;
+test_node4.setCoords(316, 121);
+
+BRO::Polygon test_polygon4;
+test_polygon4.assign(test_poly4, test_node4);
+
+test_navMesh.addShape(test_poly4);
+test_navMesh.addPoly(test_polygon4);
+
+
+//-----------------
+// 5
+//-----------------
+sf::ConvexShape test_poly5;
+test_poly5.setPointCount(5);
+
+sf::Vector2f test_point20 = sf::Vector2f(379 * game.resMultiplier, 104 * game.resMultiplier);
+test_poly5.setPoint(0, test_point20);
+sf::Vector2f test_point21 = sf::Vector2f(376 * game.resMultiplier, 115 * game.resMultiplier);
+test_poly5.setPoint(1, test_point21);
+sf::Vector2f test_point22 = sf::Vector2f(384 * game.resMultiplier, 127 * game.resMultiplier);
+test_poly5.setPoint(2, test_point22);
+sf::Vector2f test_point23 = sf::Vector2f(623 * game.resMultiplier, 127 * game.resMultiplier);
+test_poly5.setPoint(3, test_point23);
+sf::Vector2f test_point24 = sf::Vector2f(552 * game.resMultiplier, 104 * game.resMultiplier);
+test_poly5.setPoint(4, test_point24);
+
+BRO::Node test_node5;
+test_node5.setCoords(462, 115);
+
+BRO::Polygon test_polygon5;
+test_polygon5.assign(test_poly5, test_node5);
+
+test_navMesh.addShape(test_poly5);
+test_navMesh.addPoly(test_polygon5);
+
+
+//------------------------
+// ADJACENCY SETUP
+//------------------------
+test_node1.addAdjacency(test_node2);
+test_node2.addAdjacency(test_node1);
+test_node2.addAdjacency(test_node3);
+test_node3.addAdjacency(test_node2);
+test_node3.addAdjacency(test_node4);
+test_node4.addAdjacency(test_node3);
+test_node4.addAdjacency(test_node5);
+test_node5.addAdjacency(test_node4);

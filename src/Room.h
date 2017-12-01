@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "Pathfinder.h"
+#include "Player.h"
+#include "Item.h"
 
 namespace BRO{
     //--------------------
@@ -35,16 +37,22 @@ namespace BRO{
         sf::Sprite foreground;
         std::vector<sf::Sprite*> dynamicObjects;
 
+        // Pointers
+        std::vector<Item*> items;
+        BRO::Player* currentPlayer;
+        std::vector<BRO::Player*> idlePlayers;
+
         // Nav Mesh stuff
-        BRO::NavMesh navMesh;
+        BRO::NavMesh* linkedNavMesh;
         static bool compareY(const sf::Sprite *sprite1, const sf::Sprite *sprite2);
 
         // constructor
         Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, int &resMultiplier);
+        Room(const std::string &baseLayerTexturePath, int &resMultiplier);
 
         void scrollHorizontal(float playerPositionX, int &resMultiplier);
 
-        void setNavMesh(const BRO::NavMesh &_navMesh);
+        void setNavMesh(BRO::NavMesh &navMesh);
 
         void addDynamicObject(sf::Sprite &sprite);
 

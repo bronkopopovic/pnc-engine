@@ -35,6 +35,8 @@ set(SOURCE_FILES
         # Room confs
         assets/rooms/studio.conf
         assets/rooms/studio.navmesh
+        assets/rooms/test.conf
+        assets/rooms/test.navmesh
         )
 
 # Players
@@ -59,6 +61,9 @@ configure_file(assets/images/studio_pillar3.png studio_pillar3.png COPYONLY)
 configure_file(assets/images/studio_pillar4.png studio_pillar4.png COPYONLY)
 configure_file(assets/images/studio_pillar5.png studio_pillar5.png COPYONLY)
 configure_file(assets/images/studio_foreground1.png studio_foreground1.png COPYONLY)
+
+# Test Room
+configure_file(assets/images/svg_test.png svg_test.png COPYONLY)
 
 # Music
 configure_file(assets/music/track1.ogg track1.ogg COPYONLY)

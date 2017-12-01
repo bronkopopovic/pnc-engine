@@ -8,8 +8,11 @@
 //-----------------------
 // Rooms
 //-----------------------
-#include "../assets/rooms/studio.conf"
 #include "../assets/rooms/studio.navmesh"
+#include "../assets/rooms/studio.conf"
+
+#include "../assets/rooms/test.navmesh"
+#include "../assets/rooms/test.conf"
 
 //-------------------------------
 // Pathfinder

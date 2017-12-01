@@ -3,7 +3,7 @@
 
 #include "Pathfinder.h"
 #include "Cursor.h"
-//#include "Player.h"
+#include "Player.h"
 #include "Room.h"
 #include "Item.h"
 #include "Music.h"
@@ -22,14 +22,12 @@ namespace BRO{
         // pointers
         BRO::Room* currentRoom;
         BRO::Cursor* currentCursor;
-        BRO::Player* currentPlayer;
-        std::vector<BRO::Player*> idlePlayers;
         BRO::Hud* currentHud;
 
         // player switching
-        int hitCounter;
+        int clickCounter;
         sf::Vector2f mappedCursor;
-        void playerSwitcher();
+        void playerSwitcher(BRO::Game &game);
 
     };
 
