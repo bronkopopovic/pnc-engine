@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <iostream>
 
 namespace BRO{
 

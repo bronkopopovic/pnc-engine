@@ -26,6 +26,12 @@ namespace BRO{
 
     class Hud {
     public:
+
+        bool loaded;
+
+        void init();
+
+
         std::vector<BRO::PlayerIcon*> playerIcons;
 
         void drawHud(sf::RenderWindow &window);

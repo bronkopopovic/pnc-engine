@@ -31,8 +31,15 @@ void BRO::PlayerIcon::setActive(bool trueFalse) {
     }
 }
 
+void BRO::Hud::init(){
+    loaded = true;
+
+}
+
 void BRO::Hud::drawHud(sf::RenderWindow &window) {
-    for (int i = 0; i < playerIcons.size(); i++){
-        window.draw(playerIcons[i]->sprite);
+    if (loaded){
+        for (int i = 0; i < playerIcons.size(); i++){
+            window.draw(playerIcons[i]->sprite);
+        }
     }
 }
