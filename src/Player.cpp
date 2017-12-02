@@ -66,7 +66,7 @@ void BRO::Player::walk(int &resMultiplier, float &resMultiplierF){
 
     // quantized path
     sf::Vector2f unitVector(direction.x / magnitude, direction.y / magnitude);
-    std::cout<<sqrt(pow(direction.y/magnitude, 2))<<std::endl;
+
     if (moveClock.getElapsedTime().asMilliseconds() > 5 + (sqrt(pow(direction.y/magnitude, 2))*20)){
         // player-movement
         sprite.move(unitVector * (sprite.getPosition().y / (resMultiplier * 130)) * resMultiplierF);
