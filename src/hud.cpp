@@ -1,8 +1,6 @@
-//
-// Created by Roman Hock on 02.11.17.
-//
-
 #include "hud.h"
+
+// TO-DO: build verbs interface (look at, walk to, pick up, use, push, pull, etc)
 
 BRO::PlayerIcon::PlayerIcon(std::string texturePath, int y, sf::RenderWindow &window, int &resMultiplier) {
     texture.loadFromFile(texturePath);

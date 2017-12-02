@@ -67,10 +67,10 @@ void BRO::Player::walk(int &resMultiplier, float &resMultiplierF){
     // quantized path
     sf::Vector2f unitVector(direction.x / magnitude, direction.y / magnitude);
 
-    if (moveClock.getElapsedTime().asMilliseconds() > 5 + (sqrt(pow(direction.y/magnitude, 2))*20)){
-        // player-movement
+    // time step for player movement -> 6ms for x-movement, 24ms for y-movement
+    if (moveClock.getElapsedTime().asMilliseconds() > 6 + (fabs(direction.y/magnitude) * 18) ){
+
         sprite.move(unitVector * (sprite.getPosition().y / (resMultiplier * 130)) * resMultiplierF);
-        //sprite.move(direction);
 
         // scale player based on y-axis
         sprite.setScale((0.01f * (sprite.getPosition().y / resMultiplier) * 0.999f) * resMultiplier,

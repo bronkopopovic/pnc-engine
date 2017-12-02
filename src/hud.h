@@ -1,7 +1,3 @@
-//
-// Created by Roman Hock on 02.11.17.
-//
-
 #ifndef PNC_ENGINE_HUD_H
 #define PNC_ENGINE_HUD_H
 
@@ -37,6 +33,5 @@ namespace BRO{
         void drawHud(sf::RenderWindow &window);
     };
 }
-
 
 #endif //PNC_ENGINE_HUD_H

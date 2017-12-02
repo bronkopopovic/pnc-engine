@@ -68,6 +68,8 @@ int main() {
         //-------------------------------
         if(clickedInWindow){
             game.playerSwitcher(game);
+
+            // TO-DO: remove hard-coded stuff (studio_navMesh, cursor.sprite.getPos...)
             if (pathfinder.isInsidePolygon(studio_navMesh, *game.currentRoom->currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
                 game.currentRoom->currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
             }
