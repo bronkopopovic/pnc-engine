@@ -34,7 +34,7 @@ void BRO::Hud::init(sf::RenderWindow &window, int resMultiplier){
     bottom.width = window.getSize().x;
     bottom.height = window.getSize().y / 4 + 10;
     bottom.background.setSize(sf::Vector2f(bottom.width, bottom.height));
-    bottom.background.setFillColor(sf::Color(0, 0, 0, 255));
+    bottom.background.setFillColor(sf::Color(0, 0, 0, 140));
     bottom.background.setPosition(0, window.getSize().y - bottom.height);
 
 

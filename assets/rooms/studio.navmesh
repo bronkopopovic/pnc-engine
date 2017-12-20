@@ -10,9 +10,9 @@ BRO::NavMesh studio_navMesh;
 sf::ConvexShape studio_poly1;
 studio_poly1.setPointCount(12);
 
-sf::Vector2f studio_point1 = sf::Vector2f(338 * game.resMultiplier, 166 * game.resMultiplier);
+sf::Vector2f studio_point1 = sf::Vector2f(338 * game.resMultiplier, 149 * game.resMultiplier);
 studio_poly1.setPoint(0, studio_point1);
-sf::Vector2f studio_point2 = sf::Vector2f(36 * game.resMultiplier, 166 * game.resMultiplier);
+sf::Vector2f studio_point2 = sf::Vector2f(36 * game.resMultiplier, 149 * game.resMultiplier);
 studio_poly1.setPoint(1, studio_point2);
 sf::Vector2f studio_point3 = sf::Vector2f(36 * game.resMultiplier, 114 * game.resMultiplier);
 studio_poly1.setPoint(2, studio_point3);
@@ -36,7 +36,7 @@ sf::Vector2f studio_point12 = sf::Vector2f(338 * game.resMultiplier, 119 * game.
 studio_poly1.setPoint(11, studio_point12);
 
 BRO::Node studio_node1;
-studio_node1.setCoords(185, 110);
+studio_node1.setCoords(185, 108);
 
 BRO::Polygon studio_polygon1;
 studio_polygon1.assign(studio_poly1, studio_node1);
@@ -57,13 +57,13 @@ sf::Vector2f studio_point14 = sf::Vector2f(14 * game.resMultiplier, 114 * game.r
 studio_poly2.setPoint(1, studio_point14);
 sf::Vector2f studio_point15 = sf::Vector2f(0 * game.resMultiplier, 116 * game.resMultiplier);
 studio_poly2.setPoint(2, studio_point15);
-sf::Vector2f studio_point16 = sf::Vector2f(0 * game.resMultiplier, 166 * game.resMultiplier);
+sf::Vector2f studio_point16 = sf::Vector2f(0 * game.resMultiplier, 149 * game.resMultiplier);
 studio_poly2.setPoint(3, studio_point16);
-sf::Vector2f studio_point17 = sf::Vector2f(36 * game.resMultiplier, 166 * game.resMultiplier);
+sf::Vector2f studio_point17 = sf::Vector2f(36 * game.resMultiplier, 149 * game.resMultiplier);
 studio_poly2.setPoint(4, studio_point17);
 
 BRO::Node studio_node2;
-studio_node2.setCoords(17, 135);
+studio_node2.setCoords(17, 128);
 
 BRO::Polygon studio_polygon2;
 studio_polygon2.assign(studio_poly2, studio_node2);
@@ -323,7 +323,7 @@ studio_navMesh.addPoly(studio_polygon11);
 sf::ConvexShape studio_poly12;
 studio_poly12.setPointCount(5);
 
-sf::Vector2f studio_point64 = sf::Vector2f(338 * game.resMultiplier, 166 * game.resMultiplier);
+sf::Vector2f studio_point64 = sf::Vector2f(338 * game.resMultiplier, 149 * game.resMultiplier);
 studio_poly12.setPoint(0, studio_point64);
 sf::Vector2f studio_point65 = sf::Vector2f(338 * game.resMultiplier, 119 * game.resMultiplier);
 studio_poly12.setPoint(1, studio_point65);
@@ -331,11 +331,11 @@ sf::Vector2f studio_point66 = sf::Vector2f(358 * game.resMultiplier, 115 * game.
 studio_poly12.setPoint(2, studio_point66);
 sf::Vector2f studio_point67 = sf::Vector2f(393 * game.resMultiplier, 112 * game.resMultiplier);
 studio_poly12.setPoint(3, studio_point67);
-sf::Vector2f studio_point68 = sf::Vector2f(393 * game.resMultiplier, 166 * game.resMultiplier);
+sf::Vector2f studio_point68 = sf::Vector2f(393 * game.resMultiplier, 149 * game.resMultiplier);
 studio_poly12.setPoint(4, studio_point68);
 
 BRO::Node studio_node12;
-studio_node12.setCoords(364, 135);
+studio_node12.setCoords(364, 128);
 
 BRO::Polygon studio_polygon12;
 studio_polygon12.assign(studio_poly12, studio_node12);
@@ -356,13 +356,13 @@ sf::Vector2f studio_point70 = sf::Vector2f(345 * game.resMultiplier, 80 * game.r
 studio_poly13.setPoint(1, studio_point70);
 sf::Vector2f studio_point71 = sf::Vector2f(343 * game.resMultiplier, 60 * game.resMultiplier);
 studio_poly13.setPoint(2, studio_point71);
-sf::Vector2f studio_point72 = sf::Vector2f(600 * game.resMultiplier, 37 * game.resMultiplier);
+sf::Vector2f studio_point72 = sf::Vector2f(468 * game.resMultiplier, 49 * game.resMultiplier);
 studio_poly13.setPoint(3, studio_point72);
-sf::Vector2f studio_point73 = sf::Vector2f(600 * game.resMultiplier, 83 * game.resMultiplier);
+sf::Vector2f studio_point73 = sf::Vector2f(506 * game.resMultiplier, 83 * game.resMultiplier);
 studio_poly13.setPoint(4, studio_point73);
 
 BRO::Node studio_node13;
-studio_node13.setCoords(454, 72);
+studio_node13.setCoords(409, 74);
 
 BRO::Polygon studio_polygon13;
 studio_polygon13.assign(studio_poly13, studio_node13);
@@ -379,15 +379,15 @@ studio_poly14.setPointCount(4);
 
 sf::Vector2f studio_point74 = sf::Vector2f(384 * game.resMultiplier, 100 * game.resMultiplier);
 studio_poly14.setPoint(0, studio_point74);
-sf::Vector2f studio_point75 = sf::Vector2f(600 * game.resMultiplier, 83 * game.resMultiplier);
+sf::Vector2f studio_point75 = sf::Vector2f(506 * game.resMultiplier, 83 * game.resMultiplier);
 studio_poly14.setPoint(1, studio_point75);
-sf::Vector2f studio_point76 = sf::Vector2f(600 * game.resMultiplier, 115 * game.resMultiplier);
+sf::Vector2f studio_point76 = sf::Vector2f(541 * game.resMultiplier, 115 * game.resMultiplier);
 studio_poly14.setPoint(2, studio_point76);
 sf::Vector2f studio_point77 = sf::Vector2f(393 * game.resMultiplier, 112 * game.resMultiplier);
 studio_poly14.setPoint(3, studio_point77);
 
 BRO::Node studio_node14;
-studio_node14.setCoords(494, 102);
+studio_node14.setCoords(456, 102);
 
 BRO::Polygon studio_polygon14;
 studio_polygon14.assign(studio_poly14, studio_node14);
@@ -402,17 +402,17 @@ studio_navMesh.addPoly(studio_polygon14);
 sf::ConvexShape studio_poly15;
 studio_poly15.setPointCount(4);
 
-sf::Vector2f studio_point78 = sf::Vector2f(393 * game.resMultiplier, 166 * game.resMultiplier);
+sf::Vector2f studio_point78 = sf::Vector2f(393 * game.resMultiplier, 149 * game.resMultiplier);
 studio_poly15.setPoint(0, studio_point78);
 sf::Vector2f studio_point79 = sf::Vector2f(393 * game.resMultiplier, 112 * game.resMultiplier);
 studio_poly15.setPoint(1, studio_point79);
-sf::Vector2f studio_point80 = sf::Vector2f(600 * game.resMultiplier, 115 * game.resMultiplier);
+sf::Vector2f studio_point80 = sf::Vector2f(541 * game.resMultiplier, 115 * game.resMultiplier);
 studio_poly15.setPoint(2, studio_point80);
-sf::Vector2f studio_point81 = sf::Vector2f(600 * game.resMultiplier, 166 * game.resMultiplier);
+sf::Vector2f studio_point81 = sf::Vector2f(587 * game.resMultiplier, 149 * game.resMultiplier);
 studio_poly15.setPoint(3, studio_point81);
 
 BRO::Node studio_node15;
-studio_node15.setCoords(496, 139);
+studio_node15.setCoords(478, 131);
 
 BRO::Polygon studio_polygon15;
 studio_polygon15.assign(studio_poly15, studio_node15);
