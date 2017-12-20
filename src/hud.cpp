@@ -123,7 +123,7 @@ void BRO::Hud::init(sf::RenderWindow &window, int resMultiplier){
 
 }
 
-std::string BRO::Hud::constMouseOver() {
+std::string BRO::Hud::buildMouseOver() {
     if (hovC == 0 && selC == 0){
         return "";
     }
@@ -169,7 +169,7 @@ void BRO::Hud::drawHud(sf::RenderWindow &window, sf::Vector2f &mappedCursor) {
             }
         }
 
-        mouseOver.text.setString(constMouseOver());
+        mouseOver.text.setString(buildMouseOver());
 
         // bottom menu
         window.draw(bottom.background);

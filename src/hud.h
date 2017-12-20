@@ -56,7 +56,7 @@ namespace BRO{
         std::string selectedVerb;
         std::string hoveredVerb;
 
-        std::string constMouseOver();
+        std::string buildMouseOver();
 
         void drawHud(sf::RenderWindow &window, sf::Vector2f &mappedCursor);
     };
