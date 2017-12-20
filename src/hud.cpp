@@ -152,6 +152,7 @@ void BRO::Hud::drawHud(sf::RenderWindow &window, sf::Vector2f &mappedCursor) {
             if (allVerbs[i]->text.getGlobalBounds().contains(mappedCursor)){
                 hovC += 1;
                 hoveredVerb = allVerbs[i]->text.getString();
+                allVerbs[i]->text.setFillColor(sf::Color(255,255,255,255));
                 // if clicked
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
                     selC = 1;
@@ -160,6 +161,7 @@ void BRO::Hud::drawHud(sf::RenderWindow &window, sf::Vector2f &mappedCursor) {
             }
             // cursor not on verb
             else if (hovC == 0) {
+                allVerbs[i]->text.setFillColor(sf::Color(181,167,92,255));
                 hoveredVerb = "";
                 // if clicked
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
