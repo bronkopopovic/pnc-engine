@@ -9,6 +9,34 @@ BRO::RoomObject::RoomObject(const std::string filePath, float positionX, float p
     sprite.setPosition(positionX, positionY);
 }
 
+BRO::Door::Door(const std::string &texturePath, float positionX, float positionY, int &resMultiplier, BRO::Room &connectedRoom) {
+    image.loadFromFile(texturePath);
+    texture.loadFromImage(image);
+    mask.width = texture.getSize().x / 2;
+    mask.height = texture.getSize().y;
+    mask.left = 0;
+    sprite.setTexture(texture);
+    sprite.setTextureRect(mask);
+    sprite.setOrigin(0, texture.getSize().y);
+    sprite.scale(resMultiplier, resMultiplier);
+    sprite.setPosition(positionX * resMultiplier, positionY * resMultiplier);
+    opened = false;
+}
+
+void BRO::Room::addDoor(BRO::Door &door) {
+    doors.push_back(&door);
+}
+
+void BRO::Door::open() {
+    opened = true;
+    mask.left = 0;
+}
+
+void BRO::Door::close() {
+    opened = false;
+    mask.left = texture.getSize().x / 2;
+}
+
 bool BRO::Room::compareY(const sf::Sprite *sprite1, const sf::Sprite *sprite2) {
     return sprite1->getPosition().y < sprite2->getPosition().y;
 }
@@ -71,6 +99,11 @@ void BRO::Room::addDynamicObject(sf::Sprite &sprite) {
 void BRO::Room::drawRoom(sf::RenderWindow &window){
     window.setView(view);
     window.draw(baseLayer);
+
+    // doors
+    for (int i = 0; i < doors.size(); i++){
+        window.draw(doors[i]->sprite);
+    }
 }
 
 void BRO::Room::drawDynamicObjects(BRO::Room &room, sf::RenderWindow &window) {

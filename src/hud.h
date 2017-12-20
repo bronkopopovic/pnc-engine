@@ -25,12 +25,40 @@ namespace BRO{
 
         bool loaded;
 
-        void init();
+        sf::Font menuFont;
 
+        void init(sf::RenderWindow &window, int resMultiplier);
 
         std::vector<BRO::PlayerIcon*> playerIcons;
 
-        void drawHud(sf::RenderWindow &window);
+        // black box for bottom HUD
+        struct bottom{
+            int width;
+            int height;
+            sf::RectangleShape background;
+        } bottom;
+
+        // Verbs
+        struct verb{
+            sf::Text text;
+        } give, open, close, pickUp, talkTo, lookAt, use, push, pull;
+
+        std::vector<BRO::Hud::verb*> allVerbs;
+
+        // info line to show mouse over and verbs stuff
+        struct mouseOver{
+            sf::Text text;
+        } mouseOver;
+
+        std::string fullMouseOver;
+        int hovC, selC = 0;
+
+        std::string selectedVerb;
+        std::string hoveredVerb;
+
+        std::string constMouseOver();
+
+        void drawHud(sf::RenderWindow &window, sf::Vector2f &mappedCursor);
     };
 }
 

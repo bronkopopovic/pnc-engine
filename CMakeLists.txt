@@ -55,6 +55,7 @@ configure_file(assets/images/arcade.png arcade.png COPYONLY)
 
 # Studio Room
 configure_file(assets/images/studio.png studio.png COPYONLY)
+configure_file(assets/images/studio_door1.png studio_door1.png COPYONLY)
 configure_file(assets/images/studio_pillar1.png studio_pillar1.png COPYONLY)
 configure_file(assets/images/studio_pillar2.png studio_pillar2.png COPYONLY)
 configure_file(assets/images/studio_pillar3.png studio_pillar3.png COPYONLY)
@@ -64,6 +65,9 @@ configure_file(assets/images/studio_foreground1.png studio_foreground1.png COPYO
 
 # Test Room
 configure_file(assets/images/svg_test.png svg_test.png COPYONLY)
+
+# Fonts
+configure_file(assets/fonts/menu.ttf menu.ttf COPYONLY)
 
 # Music
 configure_file(assets/music/track1.ogg track1.ogg COPYONLY)

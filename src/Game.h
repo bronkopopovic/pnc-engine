@@ -27,7 +27,12 @@ namespace BRO{
         // player switching
         int clickCounter;
         sf::Vector2f mappedCursor;
+
+        void mapCursor(BRO::Game &game);
         void playerSwitcher(BRO::Game &game);
+
+
+        bool clicked;
 
     };
 

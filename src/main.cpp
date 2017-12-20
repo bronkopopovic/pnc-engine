@@ -3,16 +3,20 @@
 
 using namespace std;
 
-//---------------
-// TEST SCENE
-//---------------
 int main() {
+
+    //---------------
+    // TEST SCENE
+    //---------------
 
     #include "../configs/game.conf"
 
     #include "../assets/assets.lib"
 
     #include "../configs/test_room.conf"
+
+    BRO::Door door1("studio_door1.png", 529, 161, game.resMultiplier, testRoom);
+    studioRoom.addDoor(door1);
 
     //-------------------------------
     // Game LOOOOOOOOP
@@ -36,7 +40,7 @@ int main() {
         //-------------------------------
         // music loop
         //-------------------------------
-        track1.loop();
+        //track1.loop();
 
         //-------------------------------
         // handle room view
@@ -66,12 +70,19 @@ int main() {
         //-------------------------------
         // Click Events
         //-------------------------------
+        game.mapCursor(game);
+
         if(clickedInWindow){
+            // game.clicked = was some action performed on click? Initial value = false
+            game.clicked = false;
             game.playerSwitcher(game);
 
             // TO-DO: remove hard-coded stuff (studio_navMesh, cursor.sprite.getPos...)
-            if (pathfinder.isInsidePolygon(studio_navMesh, *game.currentRoom->currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
-                game.currentRoom->currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
+            if (! game.clicked){
+                if (pathfinder.isInsidePolygon(studio_navMesh, *game.currentRoom->currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
+                    game.currentRoom->currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
+                    game.clicked = true;
+                }
             }
         }
 
@@ -91,9 +102,9 @@ int main() {
         game.currentRoom->drawDynamicObjects(*game.currentRoom, game.window);
         game.window.draw(game.currentRoom->foreground);
 
-
         game.window.setView(game.window.getDefaultView());
-        hud.drawHud(game.window);
+
+        hud.drawHud(game.window, game.mappedCursor);
 
         game.window.setView(game.currentRoom->view);
         game.window.draw(cursor.sprite);

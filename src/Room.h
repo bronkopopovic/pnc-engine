@@ -7,6 +7,9 @@
 #include "Item.h"
 
 namespace BRO{
+
+    class Room; // forward declaration for use in class Door
+
     //--------------------
     // ROOM OBJECTS
     //--------------------
@@ -20,6 +23,28 @@ namespace BRO{
     };
 
     //--------------------
+    // DOORS
+    //--------------------
+    class Door{
+    private:
+        sf::Texture texture;
+
+    public:
+
+        sf::Image image;
+        sf::Sprite sprite;
+        sf::IntRect mask;
+
+        BRO::Room* connectedRoom;
+
+        bool opened;
+
+        Door(const std::string &texturePath, float positionX, float positionY, int &resMultiplier, BRO::Room &connectedRoom);
+        void open();
+        void close();
+    };
+
+    //--------------------
     // ROOMS
     //--------------------
     class Room{
@@ -29,32 +54,38 @@ namespace BRO{
         bool isScrollable;
 
     public:
+        // constructor
+        Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, int &resMultiplier);
+        Room(const std::string &baseLayerTexturePath, int &resMultiplier);
+
         sf::View view;
         sf::FloatRect mask;
 
         // textures and objects
         sf::Sprite baseLayer;
         sf::Sprite foreground;
+
+        // Doors and Objects
+        std::vector<BRO::Door*> doors;
         std::vector<sf::Sprite*> dynamicObjects;
 
         // Pointers
         std::vector<Item*> items;
         BRO::Player* currentPlayer;
-        std::vector<BRO::Player*> idlePlayers;
 
+        std::vector<BRO::Player*> idlePlayers;
         // Nav Mesh stuff
         BRO::NavMesh* linkedNavMesh;
-        static bool compareY(const sf::Sprite *sprite1, const sf::Sprite *sprite2);
 
-        // constructor
-        Room(const std::string &baseLayerTexturePath, const std::string &foregroundTexturePath, int &resMultiplier);
-        Room(const std::string &baseLayerTexturePath, int &resMultiplier);
+        static bool compareY(const sf::Sprite *sprite1, const sf::Sprite *sprite2);
 
         void scrollHorizontal(float playerPositionX, int &resMultiplier);
 
         void setNavMesh(BRO::NavMesh &navMesh);
 
         void addDynamicObject(sf::Sprite &sprite);
+
+        void addDoor(BRO::Door &door);
 
         void drawRoom(sf::RenderWindow &window);
 
