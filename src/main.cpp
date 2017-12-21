@@ -40,12 +40,11 @@ int main() {
         //-------------------------------
         // music loop
         //-------------------------------
-        //track1.loop();
+        track1.loop();
 
         //-------------------------------
         // handle room view
         //-------------------------------
-        game.currentRoom->scrollHorizontal(game.currentRoom->currentPlayer->sprite.getPosition().x, game.resMultiplier);
         game.currentRoom->view.reset(game.currentRoom->mask);
 
         //-------------------------------
@@ -74,14 +73,14 @@ int main() {
 
         if(clickedInWindow){
             // game.clicked = was some action performed on click? Initial value = false
-            game.clicked = false;
+            game.clickAction = false;
             game.playerSwitcher(game);
 
             // TO-DO: remove hard-coded stuff (studio_navMesh, cursor.sprite.getPos...)
-            if (! game.clicked){
+            if (! game.clickAction){
                 if (pathfinder.isInsidePolygon(studio_navMesh, *game.currentRoom->currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
                     game.currentRoom->currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
-                    game.clicked = true;
+                    game.clickAction = true;
                 }
             }
         }
@@ -89,17 +88,9 @@ int main() {
         //-------------------------------
         // draw all the stuff
         //-------------------------------
-        game.currentRoom->drawRoom(game.window);
 
-        // cursor line
-        //game.window.draw(cursorLine, 2, sf::Lines);
+        game.currentRoom->drawRoom(game.window, game.resMultiplier);
 
-        // navMesh
-        /*for (int i = 0; i < navMesh.polyList.size(); i++) {
-            game.window.draw(navMesh.polyList[i].shape);
-        }*/
-
-        game.currentRoom->drawDynamicObjects(*game.currentRoom, game.window);
         game.window.draw(game.currentRoom->foreground);
 
         game.window.setView(game.window.getDefaultView());
@@ -109,6 +100,13 @@ int main() {
         game.window.setView(game.currentRoom->view);
         game.window.draw(cursor.sprite);
 
+        // cursor line
+        //game.window.draw(cursorLine, 2, sf::Lines);
+
+        // navMesh
+        /*for (int i = 0; i < navMesh.polyList.size(); i++) {
+            game.window.draw(navMesh.polyList[i].shape);
+        }*/
 
         game.window.display();
     }

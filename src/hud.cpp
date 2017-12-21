@@ -32,7 +32,7 @@ void BRO::PlayerIcon::setActive(bool trueFalse) {
 void BRO::Hud::init(sf::RenderWindow &window, int resMultiplier){
     loaded = true;
     bottom.width = window.getSize().x;
-    bottom.height = window.getSize().y / 4 + 10;
+    bottom.height = 58 * resMultiplier;
     bottom.background.setSize(sf::Vector2f(bottom.width, bottom.height));
     bottom.background.setFillColor(sf::Color(0, 0, 0, 140));
     bottom.background.setPosition(0, window.getSize().y - bottom.height);
@@ -48,14 +48,14 @@ void BRO::Hud::init(sf::RenderWindow &window, int resMultiplier){
     give.text.setString("give");
     give.text.setCharacterSize(8 * resMultiplier);
     give.text.setFillColor(sf::Color(181,167,92,255));
-    give.text.setPosition(sf::Vector2f(6 * resMultiplier, window.getSize().y - 38 * resMultiplier));
+    give.text.setPosition(sf::Vector2f(6 * resMultiplier, window.getSize().y - 42 * resMultiplier));
     allVerbs.push_back(&give);
 
     open.text.setFont(menuFont);
     open.text.setString("open");
     open.text.setCharacterSize(8 * resMultiplier);
     open.text.setFillColor(sf::Color(181,167,92,255));
-    open.text.setPosition(sf::Vector2f(6 * resMultiplier, window.getSize().y - 26 * resMultiplier));
+    open.text.setPosition(sf::Vector2f(6 * resMultiplier, window.getSize().y - 28 * resMultiplier));
     allVerbs.push_back(&open);
 
     close.text.setFont(menuFont);
@@ -69,14 +69,14 @@ void BRO::Hud::init(sf::RenderWindow &window, int resMultiplier){
     pickUp.text.setString("pick up");
     pickUp.text.setCharacterSize(8 * resMultiplier);
     pickUp.text.setFillColor(sf::Color(181,167,92,255));
-    pickUp.text.setPosition(sf::Vector2f(50 * resMultiplier, window.getSize().y - 38 * resMultiplier));
+    pickUp.text.setPosition(sf::Vector2f(50 * resMultiplier, window.getSize().y - 42 * resMultiplier));
     allVerbs.push_back(&pickUp);
 
     talkTo.text.setFont(menuFont);
     talkTo.text.setString("talk to");
     talkTo.text.setCharacterSize(8 * resMultiplier);
     talkTo.text.setFillColor(sf::Color(181,167,92,255));
-    talkTo.text.setPosition(sf::Vector2f(50 * resMultiplier, window.getSize().y - 26 * resMultiplier));
+    talkTo.text.setPosition(sf::Vector2f(50 * resMultiplier, window.getSize().y - 28 * resMultiplier));
     allVerbs.push_back(&talkTo);
 
     lookAt.text.setFont(menuFont);
@@ -90,14 +90,14 @@ void BRO::Hud::init(sf::RenderWindow &window, int resMultiplier){
     use.text.setString("use");
     use.text.setCharacterSize(8 * resMultiplier);
     use.text.setFillColor(sf::Color(181,167,92,255));
-    use.text.setPosition(sf::Vector2f(110 * resMultiplier, window.getSize().y - 38 * resMultiplier));
+    use.text.setPosition(sf::Vector2f(110 * resMultiplier, window.getSize().y - 42 * resMultiplier));
     allVerbs.push_back(&use);
 
     push.text.setFont(menuFont);
     push.text.setString("push");
     push.text.setCharacterSize(8 * resMultiplier);
     push.text.setFillColor(sf::Color(181,167,92,255));
-    push.text.setPosition(sf::Vector2f(110 * resMultiplier, window.getSize().y - 26 * resMultiplier));
+    push.text.setPosition(sf::Vector2f(110 * resMultiplier, window.getSize().y - 28 * resMultiplier));
     allVerbs.push_back(&push);
 
     pull.text.setFont(menuFont);
@@ -116,7 +116,7 @@ void BRO::Hud::init(sf::RenderWindow &window, int resMultiplier){
     //mouseOver.text.setString("Use stuff with other stuff");
     mouseOver.text.setCharacterSize(8 * resMultiplier);
     mouseOver.text.setFillColor(sf::Color(64, 180, 180, 255));
-    mouseOver.text.setPosition(sf::Vector2f(6 * resMultiplier, window.getSize().y - 50 * resMultiplier));
+    mouseOver.text.setPosition(sf::Vector2f(6 * resMultiplier, window.getSize().y - 56 * resMultiplier));
 
 
     // INTERACTION

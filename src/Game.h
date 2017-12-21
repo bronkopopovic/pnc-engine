@@ -31,7 +31,7 @@ namespace BRO{
         void mapCursor(BRO::Game &game);
         void playerSwitcher(BRO::Game &game);
 
-        bool clicked;
+        bool clickAction;
 
     };
 

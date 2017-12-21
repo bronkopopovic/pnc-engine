@@ -22,6 +22,7 @@ namespace BRO{
         RoomObject(const std::string filePath, float positionX, float positionY, int originX, int originY, int &resMultiplier);
     };
 
+
     //--------------------
     // DOORS
     //--------------------
@@ -44,6 +45,7 @@ namespace BRO{
         void close();
     };
 
+
     //--------------------
     // ROOMS
     //--------------------
@@ -52,6 +54,10 @@ namespace BRO{
         sf::Texture baseLayerTexture;
         sf::Texture foregroundTexture;
         bool isScrollable;
+
+        void drawDynamicObjects(sf::RenderWindow &window);
+
+        void scrollHorizontal(int &resMultiplier);
 
     public:
         // constructor
@@ -79,17 +85,13 @@ namespace BRO{
 
         static bool compareY(const sf::Sprite *sprite1, const sf::Sprite *sprite2);
 
-        void scrollHorizontal(float playerPositionX, int &resMultiplier);
-
         void setNavMesh(BRO::NavMesh &navMesh);
 
         void addDynamicObject(sf::Sprite &sprite);
 
         void addDoor(BRO::Door &door);
 
-        void drawRoom(sf::RenderWindow &window);
-
-        void drawDynamicObjects(BRO::Room &room, sf::RenderWindow &window);
+        void drawRoom(sf::RenderWindow &window, int &resMultiplier);
     };
 }
 

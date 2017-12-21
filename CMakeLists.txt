@@ -68,6 +68,7 @@ configure_file(assets/images/svg_test.png svg_test.png COPYONLY)
 
 # Fonts
 configure_file(assets/fonts/menu.ttf menu.ttf COPYONLY)
+configure_file(assets/fonts/verbs.ttf verbs.ttf COPYONLY)
 
 # Music
 configure_file(assets/music/track1.ogg track1.ogg COPYONLY)

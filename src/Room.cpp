@@ -76,12 +76,12 @@ BRO::Room::Room(const std::string &baseLayerTexturePath, int &resMultiplier){
     }
 }
 
-void BRO::Room::scrollHorizontal(float playerPositionX, int &resMultiplier){
+void BRO::Room::scrollHorizontal(int &resMultiplier){
     if (isScrollable){
-        if (playerPositionX > mask.width + mask.left - 100 * resMultiplier && (baseLayerTexture.getSize().x - 1) * resMultiplier > mask.width + mask.left){
+        if (currentPlayer->sprite.getPosition().x > mask.width + mask.left - 100 * resMultiplier && (baseLayerTexture.getSize().x - 1) * resMultiplier > mask.width + mask.left){
             mask.left += 2.5f * resMultiplier;
             foreground.move(sf::Vector2f(- resMultiplier, 0));
-        } else if (playerPositionX < mask.left + 100 * resMultiplier && mask.left > 0){
+        } else if (currentPlayer->sprite.getPosition().x < mask.left + 100 * resMultiplier && mask.left > 0){
             mask.left -= 2.5f * resMultiplier;
             foreground.move(sf::Vector2f(resMultiplier, 0));
         }
@@ -96,7 +96,16 @@ void BRO::Room::addDynamicObject(sf::Sprite &sprite) {
     dynamicObjects.push_back(&sprite);
 }
 
-void BRO::Room::drawRoom(sf::RenderWindow &window){
+void BRO::Room::drawDynamicObjects(sf::RenderWindow &window) {
+    std::sort(dynamicObjects.begin(), dynamicObjects.end(), BRO::Room::compareY);
+    for (int i = 0; i < dynamicObjects.size(); i++){
+        window.draw(*dynamicObjects[i]);
+    }
+}
+
+void BRO::Room::drawRoom(sf::RenderWindow &window, int &resMultiplier){
+    scrollHorizontal(resMultiplier);
+
     window.setView(view);
     window.draw(baseLayer);
 
@@ -104,11 +113,7 @@ void BRO::Room::drawRoom(sf::RenderWindow &window){
     for (int i = 0; i < doors.size(); i++){
         window.draw(doors[i]->sprite);
     }
-}
 
-void BRO::Room::drawDynamicObjects(BRO::Room &room, sf::RenderWindow &window) {
-    std::sort(dynamicObjects.begin(), room.dynamicObjects.end(), BRO::Room::compareY);
-    for (int i = 0; i < dynamicObjects.size(); i++){
-        window.draw(*dynamicObjects[i]);
-    }
+    // objects
+    drawDynamicObjects(window);
 }

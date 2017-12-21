@@ -12,13 +12,13 @@ void BRO::Game::mapCursor(BRO::Game &game) {
 
 void BRO::Game::playerSwitcher(BRO::Game &game) {
     // check if some other action was already performed by the click
-    if (! game.clicked){
+    if (! game.clickAction){
         clickCounter = 0;
         game.currentRoom->idlePlayers.clear();
         for (int i = 0; i < currentHud->playerIcons.size(); i++){
             if (currentHud->playerIcons[i]->sprite.getGlobalBounds().contains(mappedCursor)){
                 clickCounter++;
-                game.clicked = true;
+                game.clickAction = true;
             }
         }
         for (int i = 0; i < currentHud->playerIcons.size(); i++){
