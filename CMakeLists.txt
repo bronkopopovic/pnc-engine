@@ -37,6 +37,8 @@ set(SOURCE_FILES
         assets/rooms/studio.navmesh
         assets/rooms/test.conf
         assets/rooms/test.navmesh
+        assets/rooms/corridor_studio.conf
+        assets/rooms/corridor_studio.navmesh
         )
 
 # Players
@@ -65,6 +67,9 @@ configure_file(assets/images/studio_foreground1.png studio_foreground1.png COPYO
 
 # Test Room
 configure_file(assets/images/svg_test.png svg_test.png COPYONLY)
+
+# Corridor (Studio)
+configure_file(assets/images/corridor_studio.png corridor_studio.png COPYONLY)
 
 # Fonts
 configure_file(assets/fonts/menu.ttf menu.ttf COPYONLY)

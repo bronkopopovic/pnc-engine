@@ -1,0 +1,94 @@
+//---------------------
+// NAV-MESH
+//---------------------
+BRO::NavMesh corridor_studio_navMesh;
+
+
+//-----------------
+// 1
+//-----------------
+sf::ConvexShape corridor_studio_poly1;
+corridor_studio_poly1.setPointCount(6);
+
+sf::Vector2f corridor_studio_point1 = sf::Vector2f(3 * game.resMultiplier, 131 * game.resMultiplier);
+corridor_studio_poly1.setPoint(0, corridor_studio_point1);
+sf::Vector2f corridor_studio_point2 = sf::Vector2f(47 * game.resMultiplier, 87 * game.resMultiplier);
+corridor_studio_poly1.setPoint(1, corridor_studio_point2);
+sf::Vector2f corridor_studio_point3 = sf::Vector2f(222 * game.resMultiplier, 87 * game.resMultiplier);
+corridor_studio_poly1.setPoint(2, corridor_studio_point3);
+sf::Vector2f corridor_studio_point4 = sf::Vector2f(229 * game.resMultiplier, 94 * game.resMultiplier);
+corridor_studio_poly1.setPoint(3, corridor_studio_point4);
+sf::Vector2f corridor_studio_point5 = sf::Vector2f(227 * game.resMultiplier, 142 * game.resMultiplier);
+corridor_studio_poly1.setPoint(4, corridor_studio_point5);
+sf::Vector2f corridor_studio_point6 = sf::Vector2f(3 * game.resMultiplier, 142 * game.resMultiplier);
+corridor_studio_poly1.setPoint(5, corridor_studio_point6);
+
+BRO::Node corridor_studio_node1;
+corridor_studio_node1.setCoords(121, 113);
+
+BRO::Polygon corridor_studio_polygon1;
+corridor_studio_polygon1.assign(corridor_studio_poly1, corridor_studio_node1);
+
+corridor_studio_navMesh.addShape(corridor_studio_poly1);
+corridor_studio_navMesh.addPoly(corridor_studio_polygon1);
+
+
+//-----------------
+// 2
+//-----------------
+sf::ConvexShape corridor_studio_poly2;
+corridor_studio_poly2.setPointCount(4);
+
+sf::Vector2f corridor_studio_point7 = sf::Vector2f(229 * game.resMultiplier, 94 * game.resMultiplier);
+corridor_studio_poly2.setPoint(0, corridor_studio_point7);
+sf::Vector2f corridor_studio_point8 = sf::Vector2f(261 * game.resMultiplier, 94 * game.resMultiplier);
+corridor_studio_poly2.setPoint(1, corridor_studio_point8);
+sf::Vector2f corridor_studio_point9 = sf::Vector2f(263 * game.resMultiplier, 142 * game.resMultiplier);
+corridor_studio_poly2.setPoint(2, corridor_studio_point9);
+sf::Vector2f corridor_studio_point10 = sf::Vector2f(227 * game.resMultiplier, 142 * game.resMultiplier);
+corridor_studio_poly2.setPoint(3, corridor_studio_point10);
+
+BRO::Node corridor_studio_node2;
+corridor_studio_node2.setCoords(245, 118);
+
+BRO::Polygon corridor_studio_polygon2;
+corridor_studio_polygon2.assign(corridor_studio_poly2, corridor_studio_node2);
+
+corridor_studio_navMesh.addShape(corridor_studio_poly2);
+corridor_studio_navMesh.addPoly(corridor_studio_polygon2);
+
+
+//-----------------
+// 3
+//-----------------
+sf::ConvexShape corridor_studio_poly3;
+corridor_studio_poly3.setPointCount(5);
+
+sf::Vector2f corridor_studio_point11 = sf::Vector2f(263 * game.resMultiplier, 142 * game.resMultiplier);
+corridor_studio_poly3.setPoint(0, corridor_studio_point11);
+sf::Vector2f corridor_studio_point12 = sf::Vector2f(261 * game.resMultiplier, 94 * game.resMultiplier);
+corridor_studio_poly3.setPoint(1, corridor_studio_point12);
+sf::Vector2f corridor_studio_point13 = sf::Vector2f(268 * game.resMultiplier, 87 * game.resMultiplier);
+corridor_studio_poly3.setPoint(2, corridor_studio_point13);
+sf::Vector2f corridor_studio_point14 = sf::Vector2f(497 * game.resMultiplier, 87 * game.resMultiplier);
+corridor_studio_poly3.setPoint(3, corridor_studio_point14);
+sf::Vector2f corridor_studio_point15 = sf::Vector2f(497 * game.resMultiplier, 142 * game.resMultiplier);
+corridor_studio_poly3.setPoint(4, corridor_studio_point15);
+
+BRO::Node corridor_studio_node3;
+corridor_studio_node3.setCoords(357, 110);
+
+BRO::Polygon corridor_studio_polygon3;
+corridor_studio_polygon3.assign(corridor_studio_poly3, corridor_studio_node3);
+
+corridor_studio_navMesh.addShape(corridor_studio_poly3);
+corridor_studio_navMesh.addPoly(corridor_studio_polygon3);
+
+
+//------------------------
+// ADJACENCY SETUP
+//------------------------
+corridor_studio_node1.addAdjacency(corridor_studio_node2);
+corridor_studio_node2.addAdjacency(corridor_studio_node1);
+corridor_studio_node2.addAdjacency(corridor_studio_node3);
+corridor_studio_node3.addAdjacency(corridor_studio_node2);

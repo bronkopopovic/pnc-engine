@@ -14,6 +14,9 @@
 #include "../assets/rooms/test.navmesh"
 #include "../assets/rooms/test.conf"
 
+#include "../assets/rooms/corridor_studio.navmesh"
+#include "../assets/rooms/corridor_studio.conf"
+
 //-------------------------------
 // Pathfinder
 //-------------------------------

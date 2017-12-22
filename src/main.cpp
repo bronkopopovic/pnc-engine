@@ -78,7 +78,7 @@ int main() {
 
             // TO-DO: remove hard-coded stuff (studio_navMesh, cursor.sprite.getPos...)
             if (! game.clickAction){
-                if (pathfinder.isInsidePolygon(studio_navMesh, *game.currentRoom->currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
+                if (pathfinder.isInsidePolygon(corridor_studio_navMesh, *game.currentRoom->currentPlayer, game.window, cursor.sprite.getPosition()) != -1){
                     game.currentRoom->currentPlayer->setTarget(game.window.mapPixelToCoords(sf::Mouse::getPosition(game.window)));
                     game.clickAction = true;
                 }
